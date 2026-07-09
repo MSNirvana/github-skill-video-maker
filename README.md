@@ -1,5 +1,7 @@
 # GitHub Skill Video Maker
 
+[中文说明](README.zh-CN.md)
+
 Create branded vertical explainer videos for GitHub repositories, Codex/Claude/Cursor/Kimi Skills, plugins, MCP tools, and open-source AI projects.
 
 This repository is a Codex Skill. It packages a repeatable production workflow for short-form vertical videos: live GitHub research, real screenshots, Star-count proof, storyboard briefs, subtitles, animated IP roles, unified covers, QA checks, and platform-ready publishing copy for Douyin, WeChat Channels, and Xiaohongshu.

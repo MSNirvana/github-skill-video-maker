@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub Skill Video Maker"
+  short_description: "Make branded GitHub skill explainer videos"
+  default_prompt: "Use $github-skill-video-maker to create a vertical explainer video for this GitHub Skill or open-source project."

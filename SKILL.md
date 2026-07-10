@@ -1,13 +1,13 @@
 ---
 name: github-skill-video-maker
-description: Create branded vertical explainer videos for GitHub repositories, Codex/Claude/Cursor/Kimi Skills, plugins, MCP tools, and open-source AI projects using a scriptable production pipeline. Use when the user asks to make or revise a video that introduces a GitHub project or Skill, especially when requirements include real screenshots, GitHub Star counts, structured video briefs/storyboards, subtitles, animated IP characters, unified covers, Remotion packaging, Doubao narration, QA checks, social-video style case walkthroughs, or platform-ready publishing copy for Douyin/WeChat Channels/Xiaohongshu.
+description: Create branded vertical explainer videos for GitHub repositories, Codex/Claude/Cursor/Kimi Skills, plugins, MCP tools, and open-source AI projects using a scriptable production pipeline. Use when the user asks to make or revise a video that introduces a GitHub project or Skill, especially when requirements include real screenshots, GitHub Star counts, structured video briefs/storyboards, subtitles, animated IP characters, unified covers, Remotion packaging, Doubao narration, QA checks, evidence-based visual explainers, or platform-ready publishing copy for Douyin/WeChat Channels/Xiaohongshu.
 ---
 
 # GitHub Skill Video Maker
 
 ## Output Standard
 
-Create a polished vertical explainer video that feels like a real case walkthrough, not a text-heavy slide deck.
+Create a polished vertical explainer video that feels like a clear evidence-based explanation, not a text-heavy slide deck or a fake human screencast.
 
 Default output:
 
@@ -16,6 +16,7 @@ Default output:
 - Optional `image2` key-art assets for production-grade covers, first frames, chapter openers, and branded end cards
 - Narration script and generated narration audio
 - Dual-layer Chinese subtitles: a short on-screen insight label plus complete line-by-line narration subtitles
+- A small platform-safety note in an unobtrusive non-subtitle area: `纯干货分享，不存在站外引流`
 - Preview sheet of key frames
 - A platform publishing pack for Douyin, WeChat Channels, and Xiaohongshu
 - All user-facing deliverables saved in the thread `outputs/` directory
@@ -56,6 +57,7 @@ Default output:
 4. Build the video.
    - Use Remotion or an equivalent code-driven renderer for predictable motion.
    - Use screenshots as the primary visual material.
+   - Do not simulate a human screencast with decorative mouse cursors, fake scrolling, fake clicks, or fake text selection. Use stable screenshot crops, evidence cards, zooms, pans, and precise highlights instead. If a cursor appears, it must either come from real recorded interaction or perform a concrete, semantically correct pointing action; otherwise omit it.
    - Use zoom, pan, crop, spotlight masks, callout arrows, and red boxes only on exact areas being discussed.
    - Never “randomly circle” UI. If the highlighted area is not semantically correct, remove or reposition it.
    - Bind every red box, red circle, underline, arrow, or laser mark to an explicit target: exact text phrase, UI control, file path, command, Star count, table row, or generated artifact. Broad panel highlights are allowed only when the narration names the whole panel.
@@ -64,6 +66,7 @@ Default output:
    - If a highlight cannot be anchored to the named target after render, remove the highlight or replace it with a readable evidence card. An unmarked screenshot is better than a wrong red mark.
    - Verify highlights against exported frames or a preview sheet after all motion, scaling, and cropping are applied, not only against the source screenshot.
    - Reserve stable zones for header/title, evidence screenshots, subtitles, IP characters, Star badges, and callouts. Do not let decorative or unrelated elements overlap evidence, subtitles, or each other.
+   - Add a small, low-emphasis text note `纯干货分享，不存在站外引流` in an inconspicuous safe area such as the upper-right corner or upper edge. It must not sit near the bottom line subtitles, must not cover GitHub evidence, Star badges, IP characters, or key labels, and should remain readable but visually secondary.
    - Treat `image2` as an optional upgrade, not a default requirement. Use it only when it clearly improves account identity, cover click value, and viewer comprehension compared with the baseline Remotion/IP/screenshot visual system. If generated art feels generic, weakens the IP, reduces clarity, or creates style discontinuity, skip it or revert to the baseline system.
    - Prefer generating image2 art as text-light or text-free backgrounds with reserved title zones, then overlay exact Chinese titles, project names, Star counts, and platform-safe text in Remotion. If image2 renders text inside the artwork, inspect it manually; regenerate or cover it with Remotion text if any character is wrong.
    - Record every generated key-art asset in the visual manifest with `generation_model`, `prompt`, `intended_use`, `factual_claims_allowed: false`, and `text_verified`.
@@ -231,6 +234,8 @@ Before final response, confirm these are true:
 - Professional terms are translated into plain benefits before or when they first appear.
 - Every highlight points to the correct UI element or code section.
 - Every red box/circle/arrow is anchored to an explicit target in the visual manifest and verified on an exported frame after render.
+- The video does not fake a human screencast with decorative cursors or fake interaction.
+- The small note `纯干货分享，不存在站外引流` appears in an unobtrusive non-subtitle area and does not cover evidence or IP elements.
 - The three IP forms appear and move in meaningful roles.
 - The first 3 seconds contain a concrete hook, not a generic topic label.
 - The video includes a real or representative usage flow and at least one readable evidence card.

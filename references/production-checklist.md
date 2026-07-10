@@ -13,6 +13,7 @@
 - Real case proof: for Skill videos, include at least one usage/process sequence showing prompt/input, routing or action, generated/expected artifacts, and user value.
 - GitHub full-page screenshots establish source trust; feature explanations should use zoomed crops or redrawn evidence cards that are readable without pausing.
 - AI-generated key art must not be used as evidence. Keep generated visuals for atmosphere, IP action, cover appeal, transitions, and brand moments only.
+- Do not fake a human screencast. Avoid decorative mouse cursors, fake clicks, fake scrolling, and fake text selection. If real browser interaction is not recorded, use stable screenshots, readable crops, evidence cards, zooms, pans, and precise highlights.
 
 ## Production Account Gate
 
@@ -65,6 +66,7 @@
 - Avoid stacking unrelated decorations, particles, cards, tags, or labels over evidence. Remove elements that are not doing explanatory work.
 - Export key frames or a contact sheet and check overlap between subtitles, IP, labels, callouts, highlights, Star badges, screenshots, and cover text.
 - When image2 key art is used, reserve clean overlay zones before rendering: title, subtitle, Star/source badge, IP motion, evidence crop, and bottom subtitle safe area.
+- Add the small note `纯干货分享，不存在站外引流` in a low-emphasis non-subtitle zone, preferably upper-right or upper edge. It must not be near the bottom line subtitles and must not cover evidence, Star badges, IP characters, or key labels.
 
 ## Subtitle Rules
 

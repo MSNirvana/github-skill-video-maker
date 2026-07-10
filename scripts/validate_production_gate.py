@@ -102,6 +102,21 @@ def validate_production_gate(brief: dict[str, Any]) -> dict[str, Any]:
         if _blank(item.get("start")) or _blank(item.get("end")):
             failures.append(f"subtitle_strategy.line_subtitles[{index}] must include start and end timings from final audio")
 
+    interaction = brief.get("interaction_style", {}) or {}
+    if interaction.get("fake_human_screencast") is not False:
+        failures.append("interaction_style.fake_human_screencast must be false; do not simulate human screencasts with decorative cursors or fake interaction")
+
+    safety_note = brief.get("platform_safety_note", {}) or {}
+    if safety_note.get("text") != "纯干货分享，不存在站外引流":
+        failures.append("platform_safety_note.text must be 纯干货分享，不存在站外引流")
+    if _blank(safety_note.get("placement")):
+        failures.append("platform_safety_note.placement is required and should be an unobtrusive non-subtitle zone")
+    note_qa = safety_note.get("qa", {}) or {}
+    if note_qa.get("not_near_bottom_subtitles") is not True:
+        failures.append("platform_safety_note.qa.not_near_bottom_subtitles must be true")
+    if note_qa.get("does_not_cover_key_evidence") is not True:
+        failures.append("platform_safety_note.qa.does_not_cover_key_evidence must be true")
+
     case = brief.get("real_case_flow", {})
     for field in ["input", "skill_action", "output_artifacts", "value"]:
         if _blank(case.get(field)):

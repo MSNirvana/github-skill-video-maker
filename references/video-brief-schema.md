@@ -11,7 +11,7 @@ Required top-level fields:
 - `audience`: target audience
 - `duration_seconds`: target duration
 - `language`: narration/subtitle language
-- `style`: e.g. `case-walkthrough`
+- `style`: e.g. `evidence-explainer`
 - `theme`: color/style hints
 - `ip_roles`: role mapping for head/route/key IP characters
 - `required_outputs`: expected output filenames
@@ -33,6 +33,7 @@ Required top-level fields:
 - `beginner_clarity`: plain-language explanation gate for non-expert viewers
 - `script_strategy`: content angle, HKR score, micro-story, human voice, and anti-AI-fluff checks
 - `subtitle_strategy`: dual-layer subtitle plan with insight subtitles and complete line subtitles
+- `platform_safety_note`: the unobtrusive on-video note `纯干货分享，不存在站外引流`, including placement and overlap checks
 
 Recommended storyboard scene ids:
 
@@ -46,6 +47,14 @@ Recommended storyboard scene ids:
 - `boundary`
 - `value`
 - `signature`
+
+Recommended `platform_safety_note` fields:
+
+- `text`: always `纯干货分享，不存在站外引流`
+- `placement`: preferably `upper_right` or `upper_edge`
+- `style`: small, low-emphasis, readable, and visually secondary
+- `avoid_zones`: include `line_subtitle`, `insight_subtitle`, `evidence`, `star_badge`, and `ip`
+- `qa`: confirm it is not near bottom subtitles and does not cover key evidence
 
 Recommended `image2_strategy` fields:
 

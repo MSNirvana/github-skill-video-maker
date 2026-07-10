@@ -4,7 +4,7 @@
 
 Create branded vertical explainer videos for GitHub repositories, Codex/Claude/Cursor/Kimi Skills, plugins, MCP tools, and open-source AI projects.
 
-This repository is a Codex Skill. It packages a repeatable production workflow for short-form vertical videos: live GitHub research, real screenshots, Star-count proof, storyboard briefs, subtitles, animated IP roles, unified covers, QA checks, and platform-ready publishing copy for Douyin, WeChat Channels, and Xiaohongshu.
+This repository is a Codex Skill. It packages a repeatable production workflow for short-form vertical videos: live GitHub research, real screenshots, Star-count proof, storyboard briefs, subtitles, animated IP roles, unified covers, evidence-based visual packaging, QA checks, and platform-ready publishing copy for Douyin, WeChat Channels, and Xiaohongshu.
 
 ## What It Produces
 
@@ -12,6 +12,7 @@ This repository is a Codex Skill. It packages a repeatable production workflow f
 - Cover image using the same visual system
 - Optional image2 key art for covers, first frames, chapter posters, and branded end cards
 - Narration script and narration audio
+- A small non-subtitle note: `纯干货分享，不存在站外引流`
 - Preview sheet/contact sheet
 - Visual manifest for screenshot and highlight verification
 - Image2 key-art manifest records prompts, intended use, text verification, and evidence boundaries
@@ -63,6 +64,8 @@ Target audience: AI users.
 ```
 
 The skill will guide Codex to research the repository, capture real screenshots, create a structured brief, render a video package, and generate a platform publishing pack.
+
+The skill does not fake human screencasts. Decorative cursors, fake clicks, fake scrolling, and fake text selection should be omitted unless they come from real recorded interaction or serve a concrete evidence-pointing purpose.
 
 ## Scripted Pipeline
 

@@ -23,7 +23,7 @@ def main() -> int:
     parser.add_argument("--audience", default="AI users and builders")
     parser.add_argument("--duration", type=int, default=90)
     parser.add_argument("--language", default="zh-CN")
-    parser.add_argument("--style", default="case-walkthrough")
+    parser.add_argument("--style", default="evidence-explainer")
     parser.add_argument("--output-prefix", default="", help="Output filename prefix, defaults to <slug>-case")
     args = parser.parse_args()
 
@@ -146,6 +146,21 @@ def main() -> int:
                 "line_subtitles_aligned_to_final_audio": True,
                 "insight_subtitles_are_scene_conclusions": True,
                 "no_overlap_with_evidence_ip_or_star": True,
+            },
+        },
+        "interaction_style": {
+            "fake_human_screencast": False,
+            "cursor_policy": "omit decorative cursors; use only real recorded interaction or concrete semantic pointing",
+            "preferred_visuals": ["stable screenshot crops", "readable evidence cards", "zoom", "pan", "precise highlights"],
+        },
+        "platform_safety_note": {
+            "text": "纯干货分享，不存在站外引流",
+            "placement": "upper_right_or_upper_edge",
+            "style": "small, low-emphasis, readable, visually secondary",
+            "avoid_zones": ["line_subtitle", "insight_subtitle", "evidence", "star_badge", "ip"],
+            "qa": {
+                "not_near_bottom_subtitles": True,
+                "does_not_cover_key_evidence": True,
             },
         },
         "real_case_flow": {

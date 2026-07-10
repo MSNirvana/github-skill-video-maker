@@ -151,6 +151,8 @@ def main() -> int:
             "Confirm highlights point to the exact target being discussed.",
             "Confirm all three IP roles appear in meaningful contexts.",
             "Confirm no unrelated elements overlap screenshots, subtitles, Star badges, or IP characters.",
+            "Confirm the video does not rely on fake human screencast signals such as decorative cursors, fake clicks, fake scrolling, or fake text selection.",
+            "Confirm the small note `纯干货分享，不存在站外引流` appears in an unobtrusive non-subtitle area.",
             "Confirm platform publishing copy matches current platform policies and avoids unsafe claims.",
         ],
     }

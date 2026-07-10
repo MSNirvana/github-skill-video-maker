@@ -69,6 +69,7 @@ Default output:
    - If a highlight cannot be anchored to the named target after render, remove the highlight or replace it with a readable evidence card. An unmarked screenshot is better than a wrong red mark.
    - Verify highlights against exported frames or a preview sheet after all motion, scaling, and cropping are applied, not only against the source screenshot.
    - Reserve stable zones for header/title, evidence screenshots, subtitles, IP characters, Star badges, and callouts. Do not let decorative or unrelated elements overlap evidence, subtitles, or each other.
+   - Keep the entire bottom subtitle stack visually clean. Do not place persistent presenter avatars, large IP badges, or decorative characters beside, behind, or between the insight subtitle and line subtitle. Use the proven series layout where the bottom safe area belongs to subtitles only; IP characters should sit near evidence or callouts above the subtitle band.
    - Add a small, low-emphasis text note `纯干货分享，不存在站外引流` in an inconspicuous safe area such as the upper-right corner or upper edge. It must not sit near the bottom line subtitles, must not cover GitHub evidence, Star badges, IP characters, or key labels, and should remain readable but visually secondary.
    - Treat `image2` as an optional upgrade, not a default requirement. Use it only when it clearly improves account identity, cover click value, and viewer comprehension compared with the baseline Remotion/IP/screenshot visual system. If generated art feels generic, weakens the IP, reduces clarity, or creates style discontinuity, skip it or revert to the baseline system.
    - Prefer generating image2 art as text-light or text-free backgrounds with reserved title zones, then overlay exact Chinese titles, project names, Star counts, and platform-safe text in Remotion. If image2 renders text inside the artwork, inspect it manually; regenerate or cover it with Remotion text if any character is wrong.
@@ -92,6 +93,7 @@ Default output:
      - `key`: install, access, unlock, API/key concepts
    - Animate IP characters with motion-design techniques: entrance, bobbing, tilt, glow pulse, route drawing, unlock ring, or pointing/callout behavior.
    - IP must participate in the explanation, not sit as decoration.
+   - IP must never occupy the bottom subtitle stack. If an IP character makes the line subtitles, insight subtitles, or bottom composition feel crowded, move it above the subtitle band or remove it. A clean subtitle area is more important than showing an extra character.
 
 7. Create a unified cover.
    - Same IP theme, same colors, same title treatment, same repo/Star signal.
@@ -231,6 +233,7 @@ Before final response, confirm these are true:
 - If image2 key art is used, generated visuals are separated from factual evidence, critical text is verified or overlaid, and the visual manifest records the prompt and intended use.
 - Subtitles exist throughout the final video.
 - The video uses dual-layer subtitles: concise insight labels plus complete line-by-line narration subtitles.
+- The bottom subtitle stack is clean: no persistent presenter avatar or IP element crowds, touches, or competes with the insight subtitle or line subtitle.
 - Line subtitles are aligned to the final narration audio, not hand-estimated from the storyboard.
 - The first 10 seconds pass the beginner clarity gate: a non-expert can tell what the project is, who uses it, and what pain it solves.
 - The script has a clear `script_strategy`: one core angle, HKR score, micro-story, anti-AI-fluff pass, human voice check, and escalation beats.

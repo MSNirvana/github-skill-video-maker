@@ -62,6 +62,7 @@
 
 - Reserve zones before rendering: header/title, evidence/screenshot, subtitle safe area, IP character area, Star badge, and callout/highlight area.
 - Keep subtitles above the social-platform bottom crop area and away from IP characters.
+- Keep the bottom subtitle stack clean. Do not place a persistent presenter avatar, large IP badge, or decorative character beside, behind, or between the insight subtitle and line subtitle. Match the proven series layout where IP characters explain evidence above the subtitle band, while the bottom area belongs to subtitles only.
 - Do not let IP characters cover important screenshot text, Star counts, command outputs, captions, or callouts.
 - Avoid stacking unrelated decorations, particles, cards, tags, or labels over evidence. Remove elements that are not doing explanatory work.
 - Export key frames or a contact sheet and check overlap between subtitles, IP, labels, callouts, highlights, Star badges, screenshots, and cover text.
@@ -83,6 +84,7 @@
 - Store the method and source file in `subtitle_strategy.alignment_method` and `subtitle_strategy.timing_source`.
 - Use high-contrast text with a subtle backing or stroke for both layers.
 - Reserve separate zones for insight subtitle, line subtitle, evidence screenshots, IP characters, and Star badges.
+- The reserved line-subtitle and insight-subtitle zones should not share horizontal or vertical space with persistent IP/presenter elements. If the layout feels crowded, remove the bottom IP before shrinking subtitles.
 - Keep line subtitles away from the bottom app UI/social-platform crop zone when possible.
 - Do not deliver as production-ready if the video only has sparse keyword captions and no complete line subtitles.
 - Do not deliver as production-ready if the line subtitles visibly lead or lag the narration, even when all files exist and media QA passes.

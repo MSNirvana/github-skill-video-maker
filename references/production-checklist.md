@@ -46,6 +46,8 @@
 - Highlight only the thing being named in narration.
 - Use red boxes/circles for exact UI/file regions; use dimming masks for focus; use arrows sparingly.
 - Prefer no highlight over an inaccurate highlight. A wrong red mark damages trust more than an unmarked screenshot.
+- If the exact line/circle/box/underline placement is not obvious, do not mark the screenshot. Keep it clean or convert the point into a readable evidence card.
+- Do not add marks for visual excitement. A mark is allowed only when the target is exact, named in narration, and can be verified after render.
 - If a screenshot pans or zooms, keep the highlight anchored to the visible target.
 - Remove any highlight whose target cannot be verified.
 - Bind every red mark to a precise target such as a phrase, file path, command, Star count, UI button, table row, or generated artifact name.

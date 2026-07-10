@@ -63,6 +63,8 @@ Default output:
    - Do not simulate a human screencast with decorative mouse cursors, fake scrolling, fake clicks, or fake text selection. Use stable screenshot crops, evidence cards, zooms, pans, and precise highlights instead. If a cursor appears, it must either come from real recorded interaction or perform a concrete, semantically correct pointing action; otherwise omit it.
    - Use zoom, pan, crop, spotlight masks, callout arrows, and red boxes only on exact areas being discussed.
    - Never “randomly circle” UI. If the highlighted area is not semantically correct, remove or reposition it.
+   - If you cannot clearly decide exactly where a line, circle, box, underline, or laser mark should go, do not draw it. Keep the screenshot clean, or replace the explanation with a readable evidence card. A pure screenshot is always better than a decorative or uncertain mark.
+   - Do not add markings just to make a screenshot look more dynamic. Every mark must answer: `what exact text/control/row is this`, `why is it named in narration`, and `how was the rendered position verified`.
    - Bind every red box, red circle, underline, arrow, or laser mark to an explicit target: exact text phrase, UI control, file path, command, Star count, table row, or generated artifact. Broad panel highlights are allowed only when the narration names the whole panel.
    - Do not place a highlight by visual guesswork after scaling or cropping. Define the target in a known coordinate space, such as `source_crop_pixels`, `rendered_frame_pixels`, or `normalized_frame`.
    - For every final highlight, record `target_evidence_asset`, `target_text_or_ui`, `coordinate_space`, `box_or_anchor`, `verification_method`, `verified_frame`, and `accuracy_checked` in the visual manifest.
@@ -240,6 +242,7 @@ Before final response, confirm these are true:
 - Professional terms are translated into plain benefits before or when they first appear.
 - Every highlight points to the correct UI element or code section.
 - Every red box/circle/arrow is anchored to an explicit target in the visual manifest and verified on an exported frame after render.
+- Screenshots stay clean whenever highlight placement is uncertain; no decorative or confidence-free red marks are allowed.
 - The video does not fake a human screencast with decorative cursors or fake interaction.
 - The small note `纯干货分享，不存在站外引流` appears in an unobtrusive non-subtitle area and does not cover evidence or IP elements.
 - The three IP forms appear and move in meaningful roles.

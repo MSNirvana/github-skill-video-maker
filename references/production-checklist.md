@@ -12,10 +12,24 @@
 - Mobile readability: if the important UI text is unreadable at 1080x1920, replace the full screenshot with a crop, zoom path, or redrawn evidence card that preserves the source meaning.
 - Real case proof: for Skill videos, include at least one usage/process sequence showing prompt/input, routing or action, generated/expected artifacts, and user value.
 - GitHub full-page screenshots establish source trust; feature explanations should use zoomed crops or redrawn evidence cards that are readable without pausing.
+- AI-generated key art must not be used as evidence. Keep generated visuals for atmosphere, IP action, cover appeal, transitions, and brand moments only.
 
 ## Production Account Gate
 
+- Content angle: define one `script_strategy.core_angle` before writing narration. It must describe the viewer problem, not only the repo category.
+- Account point of view: define why `凸先生，AI 全栈流程` should explain this repo, so the video sounds like part of a series rather than a generic repo recap.
+- HKR score: rate `happy`, `knowledge`, and `resonance` from 1-5. Production videos should score at least 4 in two dimensions and never below 3.
+- Viewer doubt: name the beginner's skeptical question and answer it in simple Chinese before introducing dense repo details.
+- Micro-story: build the narration as challenge -> evidence -> process -> result -> boundary -> signature.
+- Anti-AI-fluff scan: remove generic openings, report-style transitions, abstract efficiency claims, empty tool labels, unsupported hype, and README recitation.
+- Human voice: the narration should sound like a knowledgeable person explaining the project to a friend, with concrete names, mild judgment, and clear boundaries.
+- Escalation: order multiple capabilities from easiest to understand to most convincing proof. Merge beats that do not raise clarity or curiosity.
 - First 3 seconds: open with a concrete pain, contradiction, or curiosity gap. Do not open with a generic project name.
+- First 10 seconds: pass the beginner clarity gate. A non-expert viewer must understand what the project is, who it is for, and what pain it solves.
+- Define the project in one plain-language sentence before introducing commands, file names, or framework jargon.
+- Convert first-use technical terms into user benefits, for example `spec = 先把需求说清楚`, `TDD = 先写测试证明结果`, `review gate = 合并前再检查一遍`.
+- Prefer before/after explanation over feature lists: show the messy old way, then the controlled new way.
+- Add a `so what` moment every 10-15 seconds: explain why the feature matters to the viewer, not only what the repo contains.
 - Viewer promise: make clear why the target viewer should continue watching.
 - Real case flow: include prompt/input, Skill action/routing, output artifact, and why that artifact matters.
 - Proof moment: include at least one visual that makes the claim credible immediately, such as Star count, exact Skill file rule, real command output, or generated artifact.
@@ -29,13 +43,19 @@
 ## Highlight Rules
 
 - Highlight only the thing being named in narration.
-- Use red boxes for exact UI/file regions; use dimming masks for focus; use arrows sparingly.
+- Use red boxes/circles for exact UI/file regions; use dimming masks for focus; use arrows sparingly.
+- Prefer no highlight over an inaccurate highlight. A wrong red mark damages trust more than an unmarked screenshot.
 - If a screenshot pans or zooms, keep the highlight anchored to the visible target.
 - Remove any highlight whose target cannot be verified.
 - Bind every red mark to a precise target such as a phrase, file path, command, Star count, UI button, table row, or generated artifact name.
+- Do not use vague targets such as `top area`, `middle section`, `this panel`, `button area`, `标题区域`, or `这一块`.
+- Define highlight coordinates in a known coordinate space: `source_crop_pixels`, `rendered_frame_pixels`, or `normalized_frame`.
+- When a screenshot is scaled, cropped, or animated, verify the final rendered-frame position, not only the source screenshot position.
+- For code/GitHub screenshots, the highlight should cover the exact line/title/button being discussed, with small padding only. It should not swallow adjacent unrelated lines.
 - Do not highlight a broad panel unless the narration explicitly refers to the whole panel.
 - Verify highlight placement on exported frames or the preview sheet after motion is applied.
-- Record highlight target, box/anchor, and verification frame in the visual manifest.
+- Record `target_evidence_asset`, `target_text_or_ui`, `coordinate_space`, `box_or_anchor`, `verification_method`, `verified_frame`, and `accuracy_checked: true` in the visual manifest.
+- During manual QA, inspect at least every frame that contains a highlight. If a red box/circle is off-target, remove or fix it before final render.
 
 ## Layout And Occlusion Rules
 
@@ -44,20 +64,48 @@
 - Do not let IP characters cover important screenshot text, Star counts, command outputs, captions, or callouts.
 - Avoid stacking unrelated decorations, particles, cards, tags, or labels over evidence. Remove elements that are not doing explanatory work.
 - Export key frames or a contact sheet and check overlap between subtitles, IP, labels, callouts, highlights, Star badges, screenshots, and cover text.
+- When image2 key art is used, reserve clean overlay zones before rendering: title, subtitle, Star/source badge, IP motion, evidence crop, and bottom subtitle safe area.
 
 ## Subtitle Rules
 
 - Use Chinese subtitles for Chinese videos.
-- Prefer 1 line, allow 2 lines, avoid more.
-- Use high-contrast text with a subtle white or dark translucent backing.
-- Keep subtitles away from the bottom app UI/social-platform crop zone when possible.
+- Use a dual-layer subtitle system:
+  - `Insight subtitle`: a short key point or scene conclusion placed near the evidence or in a reserved mid-screen zone.
+  - `Line subtitle`: complete line-by-line narration subtitles placed in a consistent lower safe area.
+- Insight subtitles should be 4-14 Chinese characters when possible and should not repeat the line subtitle verbatim.
+- Line subtitles should preserve the full spoken meaning for silent viewing. Prefer 1 line, allow 2 lines, avoid more.
+- Final narration audio is the timing source for line subtitles. Generate or calibrate line subtitle timestamps after the final TTS audio file is produced.
+- Never hand-estimate line subtitle timing from scene duration, script paragraphs, text length, or a previous audio draft.
+- If the narration text, TTS provider, voice type, speech rate, pronunciation style, or audio edit changes, regenerate or re-align the line subtitle timestamps before rendering.
+- Acceptable alignment methods: forced alignment, ASR transcription with sentence timestamps, TTS word/sentence boundary metadata, or a manual timing pass against the final MP4/audio.
+- Store the method and source file in `subtitle_strategy.alignment_method` and `subtitle_strategy.timing_source`.
+- Use high-contrast text with a subtle backing or stroke for both layers.
+- Reserve separate zones for insight subtitle, line subtitle, evidence screenshots, IP characters, and Star badges.
+- Keep line subtitles away from the bottom app UI/social-platform crop zone when possible.
+- Do not deliver as production-ready if the video only has sparse keyword captions and no complete line subtitles.
+- Do not deliver as production-ready if the line subtitles visibly lead or lag the narration, even when all files exist and media QA passes.
 
 ## Cover Rules
 
 - 1080x1920 unless the user requests another size.
 - Include project name, one short promise, GitHub Star signal, and at least one IP character.
+- The main cover title must be function-first: directly say what the project or Skill does in plain viewer language. Use the curiosity hook as a secondary line when needed.
+- The first video frame should follow the same clarity rule as the cover. A muted viewer should immediately understand `what this Skill does`, not only feel a vague pain point.
+- For production-account covers, do not default to image2. Start from the baseline series system, then use image2 only if a side-by-side check proves it improves clarity, brand consistency, and click value. If image2 looks generic, weakens the IP, or slows comprehension, revert to the baseline cover.
 - Do not make the cover a text wall.
 - Use a curiosity-driven cover hook. Avoid generic main titles such as only `科研写作助手`; prefer a concrete promise such as `别让 AI 直接写论文` or `先证据，后正文`.
+- For Skill videos, prefer titles such as `教你创建自己的 Skill`, `把提示词做成 Skill`, or `把 AI 流程封装成 Skill` over indirect hooks such as `别把提示词换个壳`.
+- If image2 produces Chinese title text, inspect every character at full resolution. Regenerate, mask, or replace with Remotion text if the text is wrong, warped, ambiguous, or too stylized to read on mobile.
+
+## Image2 Key-Art Rules
+
+- Consider image2 for cover hero art, first-frame hero art, chapter transition posters, and final signature art only when it clearly outperforms the baseline Remotion/IP/screenshot system.
+- Keep generated artwork consistent with the user's IP: black/red energy, laser/infinity-eye motif, white/black IP roles, tech/workflow atmosphere.
+- Prefer text-light prompts with reserved space for Remotion overlays.
+- Never ask image2 to invent GitHub Star counts, repo UI, code snippets, user results, platform logos, or factual evidence.
+- Store generated assets in `work/<slug>/image2/` and copy final user-facing key art to `outputs/` or the final delivery folder.
+- Record `generation_model`, `prompt`, `negative_prompt`, `intended_use`, `source_references`, `text_verified`, and `factual_claims_allowed` in the visual manifest.
+- Add AI-assisted disclosure to publishing copy whenever generated key art appears in the final video or cover.
 
 ## IP Motion Roles
 
@@ -95,8 +143,14 @@ Save final user-facing files in `outputs/`:
 - Run `fetch_github_metadata.py` before scripting so Star count, license, default branch, topics, and release/tag data are current. Prefer `GITHUB_TOKEN`; if the script uses HTML fallback, secondary fields may be sparse.
 - Run `capture_github_screenshots.py` before designing visuals. Pass the metadata `default_branch` when capturing repo paths. Treat crop boxes as starting points; verify visually.
 - Run `create_video_brief.py` before rendering so metadata, screenshots, IP roles, required outputs, and scene intent are in one JSON file.
+- Fill `script_strategy` with `core_angle`, `viewer_doubt`, `plain_answer`, `account_point_of_view`, `hkr_score`, `micro_story`, `anti_ai_fluff_scan`, `human_voice_rules`, `escalation_beats`, and QA booleans.
 - Fill production fields in `video-brief.json`: `hook`, `why_watch`, `real_case_flow`, `proof_moment`, `cover_hook`, `cta`, `creator_signature`, `retention_beats`, `evidence_cards`, and `sound_design`.
+- Fill `beginner_clarity` with `plain_definition`, `target_user`, `pain_solved`, `first_10_seconds`, `jargon_translations`, and `so_what_beats`.
+- Fill `subtitle_strategy` with both `insight_subtitles` and `line_subtitles`; sparse keyword captions are not enough.
+- Fill `subtitle_strategy.timing_source` with the final narration audio path and `subtitle_strategy.alignment_method` with the actual alignment method used.
 - Run `validate_production_gate.py` before rendering and again before delivery.
 - Maintain `visual-manifest.json` during editing for screenshot selection, highlight targets, and layout/occlusion checks. Validate it with `scripts/validate_visual_manifest.py`.
+- If image2 assets are used, include generated key-art records in `visual-manifest.json` and manually inspect them for wrong text, fake UI, logo/copyright risk, IP mismatch, and factual confusion.
+- Treat visual-manifest highlight failures as blocking. The final video is not production-ready if any red box/circle lacks target evidence, coordinate space, verification method, or exported-frame confirmation.
 - Run `qa_check.py` after rendering. It checks required files, media tracks, dimensions, and brief-level Star data. Use explicit `--video`, `--cover`, `--narration-text`, `--narration-audio`, and `--preview` arguments when final filenames differ from the brief. It still requires manual visual inspection for subtitles, highlight correctness, and IP overlap.
 - Pass `--publishing-pack outputs/<project>-publishing-pack.md` to `qa_check.py` when the publishing pack filename differs from the brief.

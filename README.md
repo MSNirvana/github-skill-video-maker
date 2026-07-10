@@ -10,9 +10,11 @@ This repository is a Codex Skill. It packages a repeatable production workflow f
 
 - `1080x1920`, `30fps`, about `90s` vertical MP4
 - Cover image using the same visual system
+- Optional image2 key art for covers, first frames, chapter posters, and branded end cards
 - Narration script and narration audio
 - Preview sheet/contact sheet
 - Visual manifest for screenshot and highlight verification
+- Image2 key-art manifest records prompts, intended use, text verification, and evidence boundaries
 - Platform publishing pack with titles, captions, topics, pinned comments, AI disclosure, and compliance notes
 
 ## Skill Layout
@@ -25,6 +27,7 @@ github-skill-video-maker/
 ├── assets/
 │   └── ip/
 ├── references/
+│   ├── image2-key-art.md
 │   ├── platform-publishing-pack.md
 │   ├── production-checklist.md
 │   └── video-brief-schema.md

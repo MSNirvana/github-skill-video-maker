@@ -10,9 +10,11 @@
 
 - `1080x1920`、`30fps`、约 `90s` 的竖屏 MP4
 - 与视频统一风格的封面图
+- 可选 image2 主视觉：用于封面、第一帧、章节转场和结尾品牌图
 - 旁白文案和旁白音频
 - 关键帧预览图/contact sheet
 - 视觉 manifest，用来记录截图来源、红框目标、遮挡检查
+- image2 关键图 manifest，用来记录提示词、用途、文字校验和“不可作为事实证据”的边界
 - 抖音、视频号、小红书发布包：标题、正文、话题、置顶评论、AI 辅助声明和合规避坑
 
 ## 适合什么场景
@@ -32,6 +34,7 @@ github-skill-video-maker/
 ├── assets/
 │   └── ip/
 ├── references/
+│   ├── image2-key-art.md
 │   ├── platform-publishing-pack.md
 │   ├── production-checklist.md
 │   └── video-brief-schema.md

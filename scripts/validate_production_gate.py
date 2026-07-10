@@ -27,6 +27,81 @@ def validate_production_gate(brief: dict[str, Any]) -> dict[str, Any]:
     if _blank(brief.get("why_watch")):
         failures.append("why_watch is required")
 
+    script = brief.get("script_strategy", {})
+    for field in ["core_angle", "viewer_doubt", "plain_answer", "account_point_of_view"]:
+        if _blank(script.get(field)):
+            failures.append(f"script_strategy.{field} is required")
+
+    hkr = script.get("hkr_score", {}) or {}
+    hkr_values = []
+    for field in ["happy", "knowledge", "resonance"]:
+        value = hkr.get(field)
+        if _blank(value):
+            failures.append(f"script_strategy.hkr_score.{field} is required")
+            continue
+        try:
+            numeric = float(value)
+        except (TypeError, ValueError):
+            failures.append(f"script_strategy.hkr_score.{field} must be numeric")
+            continue
+        hkr_values.append(numeric)
+        if numeric < 3:
+            failures.append(f"script_strategy.hkr_score.{field} must be at least 3")
+    if hkr_values and sum(1 for value in hkr_values if value >= 4) < 2:
+        failures.append("script_strategy.hkr_score should score at least 4 in two dimensions")
+
+    micro_story = script.get("micro_story", {}) or {}
+    for field in ["challenge", "evidence", "process", "result", "boundary", "signature"]:
+        if _blank(micro_story.get(field)):
+            failures.append(f"script_strategy.micro_story.{field} is required")
+
+    anti_fluff = script.get("anti_ai_fluff_scan", {}) or {}
+    if anti_fluff.get("passed") is not True:
+        failures.append("script_strategy.anti_ai_fluff_scan.passed must be true after rewriting generic/README-like narration")
+    if len(script.get("escalation_beats", []) or []) < 4:
+        failures.append("script_strategy.escalation_beats should include at least 4 ordered clarity/proof beats")
+    script_qa = script.get("qa", {}) or {}
+    for field in [
+        "one_core_angle",
+        "not_readme_summary",
+        "beginner_can_understand_without_github",
+        "claims_backed_by_evidence_or_boundary",
+        "human_voice_not_ai_summary",
+    ]:
+        if script_qa.get(field) is not True:
+            failures.append(f"script_strategy.qa.{field} must be true")
+
+    beginner = brief.get("beginner_clarity", {})
+    for field in ["plain_definition", "target_user", "pain_solved", "first_10_seconds"]:
+        if _blank(beginner.get(field)):
+            failures.append(f"beginner_clarity.{field} is required")
+    if len(beginner.get("jargon_translations", {}) or {}) < 2:
+        failures.append("beginner_clarity.jargon_translations should include at least 2 plain-language translations")
+    if len(beginner.get("so_what_beats", []) or []) < 4:
+        failures.append("beginner_clarity.so_what_beats should include at least 4 viewer-value beats")
+
+    subtitles = brief.get("subtitle_strategy", {})
+    if subtitles.get("mode") != "dual-layer":
+        failures.append("subtitle_strategy.mode must be dual-layer")
+    if len(subtitles.get("insight_subtitles", []) or []) < 5:
+        failures.append("subtitle_strategy.insight_subtitles should include at least 5 scene-level key points")
+    if len(subtitles.get("line_subtitles", []) or []) < 8:
+        failures.append("subtitle_strategy.line_subtitles should include complete narration chunks, not sparse keywords")
+    if _blank(subtitles.get("timing_source")):
+        failures.append("subtitle_strategy.timing_source must point to the final narration audio used for subtitle timing")
+    if _blank(subtitles.get("alignment_method")):
+        failures.append("subtitle_strategy.alignment_method is required; do not hand-estimate line subtitle timing")
+    safe_zones = subtitles.get("safe_zones", {}) or {}
+    if _blank(safe_zones.get("insight_subtitle")) or _blank(safe_zones.get("line_subtitle")):
+        failures.append("subtitle_strategy.safe_zones must reserve insight_subtitle and line_subtitle zones")
+    subtitle_qa = subtitles.get("qa", {}) or {}
+    if subtitle_qa.get("line_subtitles_aligned_to_final_audio") is not True:
+        failures.append("subtitle_strategy.qa.line_subtitles_aligned_to_final_audio must be true after audio-sync verification")
+
+    for index, item in enumerate(subtitles.get("line_subtitles", []) or []):
+        if _blank(item.get("start")) or _blank(item.get("end")):
+            failures.append(f"subtitle_strategy.line_subtitles[{index}] must include start and end timings from final audio")
+
     case = brief.get("real_case_flow", {})
     for field in ["input", "skill_action", "output_artifacts", "value"]:
         if _blank(case.get(field)):

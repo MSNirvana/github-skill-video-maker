@@ -17,6 +17,48 @@ REQUIRED_EVIDENCE_FIELDS = [
     "why_this_screenshot",
 ]
 
+REQUIRED_HIGHLIGHT_FIELDS = [
+    "target",
+    "target_evidence_asset",
+    "target_text_or_ui",
+    "coordinate_space",
+    "box_or_anchor",
+    "verification_method",
+    "verified_frame",
+]
+
+ALLOWED_COORDINATE_SPACES = {
+    "source_crop_pixels",
+    "rendered_frame_pixels",
+    "normalized_frame",
+}
+
+VAGUE_HIGHLIGHT_TARGETS = {
+    "area",
+    "button",
+    "card",
+    "panel",
+    "section",
+    "screenshot",
+    "text",
+    "title",
+    "top area",
+    "middle section",
+    "this panel",
+    "区域",
+    "按钮",
+    "卡片",
+    "面板",
+    "截图",
+    "文本",
+    "标题",
+    "这一块",
+    "这里",
+    "上面区域",
+    "中间区域",
+    "标题区域",
+}
+
 
 def _is_blank(value: Any) -> bool:
     return value is None or value == "" or value == [] or value == {}
@@ -66,12 +108,20 @@ def validate_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
 
         for highlight_index, highlight in enumerate(scene.get("highlights", [])):
             label = f"{scene_id}.highlights[{highlight_index}]"
-            if _is_blank(highlight.get("target")):
-                failures.append(f"{label}: missing explicit target")
-            if _is_blank(highlight.get("box_or_anchor")):
-                failures.append(f"{label}: missing box_or_anchor")
-            if _is_blank(highlight.get("verified_frame")):
-                failures.append(f"{label}: missing verified_frame")
+            for field in REQUIRED_HIGHLIGHT_FIELDS:
+                if _is_blank(highlight.get(field)):
+                    failures.append(f"{label}: missing {field}")
+            target = str(highlight.get("target", "")).strip().lower()
+            target_text_or_ui = str(highlight.get("target_text_or_ui", "")).strip().lower()
+            if target in VAGUE_HIGHLIGHT_TARGETS or target_text_or_ui in VAGUE_HIGHLIGHT_TARGETS:
+                failures.append(f"{label}: highlight target is too vague; name exact text, UI control, command, line, Star count, or artifact")
+            coordinate_space = highlight.get("coordinate_space")
+            if coordinate_space and coordinate_space not in ALLOWED_COORDINATE_SPACES:
+                failures.append(
+                    f"{label}: coordinate_space must be one of {', '.join(sorted(ALLOWED_COORDINATE_SPACES))}"
+                )
+            if highlight.get("accuracy_checked") is not True:
+                failures.append(f"{label}: accuracy_checked must be true after exported-frame inspection")
             if _box_is_too_broad(highlight.get("box_or_anchor")) and not highlight.get("allow_broad_panel"):
                 failures.append(f"{label}: broad highlight requires allow_broad_panel=true and matching narration")
 

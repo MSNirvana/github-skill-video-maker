@@ -20,6 +20,7 @@ Default output:
 - Preview sheet of key frames
 - A platform publishing pack for Douyin, WeChat Channels, and Xiaohongshu
 - All user-facing deliverables saved in the thread `outputs/` directory
+- When archiving final deliverables for this user's production account, copy them to `/Users/gaoyunhong/Desktop/凸先生/视频素材/<YYYYMMDD> <SkillName>`; use the Skill/project name after the date, for example `20260710 Claude-video`, and do not add daily sequence numbers.
 
 ## Required Workflow
 

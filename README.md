@@ -12,7 +12,7 @@ This repository is a Codex Skill. It packages a repeatable production workflow f
 - Cover image using the same visual system
 - Optional image2 key art for covers, first frames, chapter posters, and branded end cards
 - Narration script and narration audio
-- Meme-style, contrast-style, and practical title candidates, with a recommended punchy-but-true title
+- Meme-style, contrast-style, and practical title candidates, with narration/body copy that keeps the same funny-but-useful voice
 - A small non-subtitle note: `纯干货分享，不存在站外引流`
 - Preview sheet/contact sheet
 - Visual manifest for screenshot and highlight verification
@@ -68,7 +68,7 @@ The skill will guide Codex to research the repository, capture real screenshots,
 
 The skill does not fake human screencasts. Decorative cursors, fake clicks, fake scrolling, and fake text selection should be omitted unless they come from real recorded interaction or serve a concrete evidence-pointing purpose.
 
-Titles and openings should be funny or surprising enough to earn attention, but they must be grounded by real evidence such as screenshots, Star counts, files, commands, or workflow artifacts.
+Titles, narration, body copy, and subtitles should be funny or surprising enough to earn attention, but they must be grounded by real evidence such as screenshots, Star counts, files, commands, or workflow artifacts. Use quoted playful phrases such as `“全家桶”` or `“一人公司”` when the phrase is entertainment framing rather than a literal guarantee.
 
 ## Scripted Pipeline
 

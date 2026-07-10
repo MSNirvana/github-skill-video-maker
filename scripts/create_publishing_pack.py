@@ -24,24 +24,32 @@ def title_pack(brief: dict, full_name: str, stars: str) -> dict[str, str]:
     lower_context = " ".join([full_name, cover_hook, plain]).lower()
 
     if "agent" in lower_context or "agents" in lower_context:
-        meme = "一人公司？一个 Skill 全家桶全搞定！"
+        meme = "“一人公司”？一个 Skill “全家桶”全搞定！"
         contrast = "别让一个 AI 演完整家公司"
         practical = "把 AI 助手拆成一支专家团队"
-        boundary = "这里的“全家桶”不是一键替你干完所有活，而是把常用角色、流程和安装方式打包好。"
+        body_hook = "你可以把它理解成 AI 的“岗位表”：谁写前端，谁审代码，谁做文档，先把队伍排明白。"
+        body_value = "以前是一个助手硬着头皮打全场，现在是前端、测试、安全、文档各回各工位。"
+        boundary = "所谓“全家桶”，不是一键替你干完所有活，而是把常用角色、流程和安装方式打包好。"
     elif "writing" in lower_context or "writer" in lower_context or "写作" in lower_context:
         meme = "别让 AI 上来就开写，先把证据摆桌上"
         contrast = "不是写得慢，是流程太野"
         practical = "用 Skill 把写作流程先管起来"
+        body_hook = "这类 Skill 更像给 AI 写作装了个“刹车片”：先看证据，再动笔。"
+        body_value = "不是让 AI 一路狂飙到终稿，而是把选题、证据、结构和修改顺序摆清楚。"
         boundary = "这里不是代写终稿，而是把选题、证据、结构和修改流程管清楚。"
     elif "frontend" in lower_context or "design" in lower_context or "前端" in lower_context:
         meme = "别让 AI 把页面做成精神小伙装修"
         contrast = "不是不会写代码，是没人管设计边界"
         practical = "用 Skill 约束前端设计流程"
+        body_hook = "它像给 AI 前端装了个“审美红绿灯”：哪里能放飞，哪里先刹车。"
+        body_value = "重点不是让页面更花，而是把布局、组件、颜色和交付边界管住。"
         boundary = "这里不是保证一键出神图，而是把视觉规则、组件边界和交付步骤说清楚。"
     else:
         meme = f"{cover_hook}，这不比硬背提示词香？"
         contrast = "不是工具不行，是流程没人管"
         practical = f"{cover_hook}｜GitHub Skill 案例"
+        body_hook = "你可以把它当成一个“流程外挂”：不是替你乱冲，而是先把步骤排好。"
+        body_value = "我看的不是它名字多酷，而是它有没有真实截图、规则、命令和可落地路径。"
         boundary = "这里不是承诺一键完成所有结果，而是拆解一个开源项目的真实流程和边界。"
 
     star_title = f"{stars} Stars 的项目，先别急着收藏" if stars else "这个 GitHub 项目，先别急着收藏"
@@ -51,6 +59,8 @@ def title_pack(brief: dict, full_name: str, stars: str) -> dict[str, str]:
         "practical": practical,
         "star": star_title,
         "recommended": meme,
+        "body_hook": body_hook,
+        "body_value": body_value,
         "boundary": boundary,
     }
 
@@ -117,11 +127,13 @@ AI 辅助声明：{disclosure}
 
 {titles["meme"]}
 
-{why_watch}
+{titles["body_hook"]}
+
+{titles["body_value"]}
 
 {titles["boundary"]}
 
-它的重点不是替你完成结果，而是把任务拆成流程、记录和证据约束。
+这条视频就干一件事：不念 README，直接看它到底把 AI 工作流“管”在哪。
 
 {source_note}
 
@@ -152,9 +164,11 @@ AI 辅助声明：{disclosure}
 
 这期拆的是 {full_name}。
 
+{titles["body_hook"]}
+
 {titles["boundary"]}
 
-我更关注它背后的工作流：先判断任务，再生成结构、记录进度、约束证据，而不是直接给一个看似完整的结果。
+我更关注它背后的工作流：别让 AI 上来就冲，先把角色、步骤、证据和边界安排明白。
 
 {source_note}
 
@@ -184,13 +198,15 @@ AI 辅助声明：{disclosure}
 
 今天记录一个 GitHub Skill 案例：{full_name}
 
+{titles["body_hook"]}
+
 {titles["boundary"]}
 
-我觉得它有价值的地方不是“更快生成”，而是：
+我觉得它有价值的地方，不是喊一句“效率起飞”，而是：
 
-- 先判断任务类型
-- 再拆结构和进度
-- 最后用证据约束输出
+- 先判断任务类型，别让 AI 开局乱跑
+- 再拆结构和进度，把活排进“工位”
+- 最后用证据约束输出，少一点玄学，多一点流程
 
 适合关注 AI 工作流、开源工具、自动化流程的人收藏参考。
 

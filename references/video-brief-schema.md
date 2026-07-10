@@ -141,6 +141,7 @@ Recommended `viral_packaging` fields:
 - `practical_titles`: at least 3 clearer search-friendly titles
 - `recommended_title`: the strongest title that is funny but true
 - `opening_line`: the first spoken line or first-frame line that earns attention
+- `body_voice`: how the narration body and publishing body keep the same fun-but-useful voice
 - `factual_anchor`: repo name, Star count, role count, install command, or file evidence used to ground the hook
 - `boundary_clarifier`: short line that narrows any playful exaggeration, such as `不是一键替你干完所有活，而是把常用角色和流程打包好`
 - `qa`: checks for no false guarantees, no fake official endorsement, and beginner clarity

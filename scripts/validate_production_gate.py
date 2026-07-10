@@ -87,11 +87,18 @@ def validate_production_gate(brief: dict[str, Any]) -> dict[str, Any]:
         failures.append("viral_packaging.contrast_titles should include at least 3 contrast/curiosity title candidates")
     if len(viral.get("practical_titles", []) or []) < 3:
         failures.append("viral_packaging.practical_titles should include at least 3 practical/search-friendly title candidates")
-    for field in ["recommended_title", "opening_line", "factual_anchor", "boundary_clarifier"]:
+    for field in ["recommended_title", "opening_line", "body_voice", "factual_anchor", "boundary_clarifier"]:
         if _blank(viral.get(field)):
             failures.append(f"viral_packaging.{field} is required")
     viral_qa = viral.get("qa", {}) or {}
-    for field in ["funny_or_surprising", "no_false_guarantee", "no_fake_official_endorsement", "grounded_by_evidence_in_first_10_seconds"]:
+    for field in [
+        "funny_or_surprising",
+        "body_copy_keeps_same_voice",
+        "playful_keywords_quoted_when_exaggerated",
+        "no_false_guarantee",
+        "no_fake_official_endorsement",
+        "grounded_by_evidence_in_first_10_seconds",
+    ]:
         if viral_qa.get(field) is not True:
             failures.append(f"viral_packaging.qa.{field} must be true")
 

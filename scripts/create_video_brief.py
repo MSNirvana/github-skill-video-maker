@@ -137,10 +137,13 @@ def main() -> int:
             "practical_titles": [],
             "recommended_title": "",
             "opening_line": "",
+            "body_voice": "",
             "factual_anchor": "",
             "boundary_clarifier": "",
             "qa": {
                 "funny_or_surprising": False,
+                "body_copy_keeps_same_voice": False,
+                "playful_keywords_quoted_when_exaggerated": False,
                 "no_false_guarantee": False,
                 "no_fake_official_endorsement": False,
                 "grounded_by_evidence_in_first_10_seconds": False,

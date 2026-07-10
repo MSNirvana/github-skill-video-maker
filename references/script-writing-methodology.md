@@ -4,6 +4,8 @@ Use this reference before writing narration, insight subtitles, cover hooks, or 
 
 The goal is not to imitate any creator's private voice. The goal is to turn a GitHub project into a clear, trustworthy, beginner-friendly short-video story with the user's own account positioning.
 
+The default tone should be `谈笑中讲干货`: funny enough to make viewers stay, clear enough that beginners understand, and evidence-backed enough that it does not become empty clickbait.
+
 ## Content Angle Gate
 
 Before writing the final script, define the angle in one sentence:
@@ -30,6 +32,7 @@ Recommended title selection:
 - Prefer a title with a hook first and a real value second: `一人公司？一个 Skill 全家桶全搞定！`
 - Keep the factual anchor in the subtitle, cover badge, or first 10 seconds: repo name, Star count, role count, install path, or real file evidence.
 - Make the viewer smile, then immediately answer `所以它到底有什么用`.
+- Use quotation marks for playful exaggerations when helpful, such as `“全家桶”`, `“一人公司”`, `“AI 部门”`, so the phrase reads as entertainment framing rather than a literal guarantee.
 
 Allowed comedic devices:
 
@@ -49,6 +52,37 @@ Opening line pattern:
 - Start with a funny pain: `你让一个 AI 写前端、审代码、做增长，它都快被你安排成联合创始人了。`
 - Then define plainly: `Agency Agents 做的事，是把 AI 拆成可安装的专家角色。`
 - Then show proof: `制作时 GitHub 大约 130k Stars，仓库里有 299 个 agent 文件。`
+
+## Body Copy And Narration Style
+
+The fun tone must continue beyond the title. Do not write a viral title and then fall back into a stiff project explanation.
+
+Apply the same style to:
+
+- narration script
+- insight subtitles
+- first-frame text
+- platform body copy
+- pinned comments
+
+Use a `joke -> explanation -> evidence -> boundary` rhythm:
+
+1. Joke or vivid analogy: `这不是一个 agent，这是给 AI 开了个“迷你公司”。`
+2. Plain explanation: `它把前端、测试、安全、营销拆成不同角色。`
+3. Evidence: `制作时 GitHub 大约 130k Stars，仓库里有 299 个 Markdown agent 文件。`
+4. Boundary: `当然，不是让你一口气全装，先挑三五个常用角色就够。`
+
+Good body-copy style:
+
+- `你可以把它当成 AI 的“岗位表”：谁写前端，谁审代码，谁做文档，别再让一个助手打全场。`
+- `所谓“全家桶”，不是一键替你上班，而是把常见角色和流程提前打包。`
+- `如果你现在的 AI 工作流像临时拉群，这个项目更像先把组织架构搭起来。`
+
+Bad body-copy style:
+
+- `本项目是一个开源 AI Agent 角色库，支持多平台集成。`
+- `该项目提升效率，赋能工作流，具备较强生态价值。`
+- `一键搞定所有 AI 工作。`
 
 ## HKR Video Test
 
@@ -81,6 +115,7 @@ Narration should sound like a knowledgeable person explaining a project to a fri
 - Use plain benefits before jargon. Example: `spec` becomes `先把需求说清楚`, then mention the term.
 - Use mild personal judgment when useful: `我觉得这个项目真正有价值的地方是...`
 - Add light humor where it clarifies the point, not where it distracts from evidence.
+- Carry the same light humor through the body, not only the hook.
 - Admit uncertainty or boundaries when the repo does not prove a claim.
 - Use short oral sentences. One spoken line should usually contain one idea.
 - Add a direct viewer address only where it helps: `如果你也经常让 AI 重复做同一类任务...`
@@ -96,6 +131,7 @@ Rewrite any narration that contains these patterns:
 - README recitation: listing features without showing who uses them and why they matter.
 - Unsupported hype: `神器`, `颠覆`, `全网第一`, `必备`, unless the evidence and platform policy support the claim.
 - Stiff platform titles: `某某项目介绍`, `一个 GitHub 项目案例`, `AI 全栈流程里为什么...`. Rewrite these into punchy-but-true hooks.
+- Stiff body copy: `本项目主要用于...`, `它具备...`, `本文将介绍...`. Rewrite into conversational lines with a joke, example, or analogy.
 
 ## Escalation Beats
 
@@ -120,3 +156,4 @@ Before final rendering, answer these checks in `script_strategy.qa`:
 - Would a beginner understand the video without opening GitHub?
 - Does the narration sound like a human explanation rather than an AI summary?
 - Are the title and opening at least mildly funny or surprising without making unsupported claims?
+- Does the body copy keep the same fun-but-useful voice instead of reverting to a project manual?

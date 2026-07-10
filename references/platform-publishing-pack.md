@@ -33,10 +33,12 @@ Douyin:
 - Include AI-assisted disclosure when the video uses AI narration, generated visuals, voice cloning, or synthetic characters.
 - Avoid wording that implies platform manipulation, guaranteed earnings, academic cheating, medical/legal/financial certainty, or bypassing review.
 - Title options should include at least one `玩梗标题`, one `反差标题`, and one `干货标题`. Prefer the punchiest truthful option as the recommended title.
+- Body copy should keep the same playful voice as the title. Use quoted meme phrases like `“全家桶”` or `“一人公司”` to signal light entertainment, then explain the real workflow value.
 
 WeChat Channels:
 
 - Use slightly calmer, trust-building copy, but do not become a product manual. A light joke or contrast is allowed if the body quickly anchors it with evidence.
+- Keep the body conversational. It can say `所谓“全家桶”` or `别让一个 AI 演完整家公司`, as long as the next sentence grounds it with source evidence.
 - Mention source and capture date when discussing GitHub Stars.
 - Encourage comments, follows, and forwarding rather than aggressive conversion.
 - Avoid unsupported authority claims such as official endorsement, guaranteed outcome, or certified effectiveness.
@@ -45,6 +47,7 @@ Xiaohongshu:
 
 - Use searchable practical titles with a conversational hook, not pure clickbait.
 - Make the body feel like a useful note: what it is, who it helps, what it cannot do.
+- Keep the note lively: use analogies, quoted meme phrases, and mild roast, then list practical takeaways.
 - Add collection/comment CTA.
 - Avoid exaggerated “种草” claims, absolute superlatives, fake personal experience, and unsupported before/after results.
 
@@ -56,9 +59,14 @@ Xiaohongshu:
 - Risky unless narrowed immediately: `全自动搞定`, `一键做完`, `躺着起飞`
 - Bad: `稳赚`, `100%`, `官方推荐`, `绕过审核`, `保过`
 
-Use the hook to earn attention, then use the body copy to clarify boundaries:
+Use the hook to earn attention, then use the body copy to keep the same fun-but-useful rhythm:
 
-`这里的“全家桶”不是替你一键完成所有工作，而是把常用角色、流程和安装方式打包好。`
+`所谓“全家桶”，不是替你一键完成所有工作，而是把常用角色、流程和安装方式打包好。`
+
+Avoid body copy that sounds like a product spec:
+
+- Bad: `本项目是一个开源 AI Agent 角色库，支持多平台集成。`
+- Better: `你可以把它理解成 AI 的“岗位表”：谁写前端，谁审代码，谁做文档，先把队伍排明白。`
 
 ## High-Risk Terms
 

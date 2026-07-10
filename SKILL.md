@@ -50,7 +50,8 @@ Default output:
    - Avoid on-screen paragraphs. On-screen text should be short labels or emphasis words.
    - Use narration for explanation, visuals for evidence.
    - For Skill videos, include at least one real or representative usage flow: user prompt/input -> Skill routing/action -> generated or expected artifacts -> value. Do not rely only on repo browsing.
-   - Before finalizing the cover title, first-frame title, opening line, or platform titles, create a punchy packaging layer: at least 3 `玩梗标题`, 3 `反差标题`, and 3 `干货标题`. Prefer funny, meme-friendly hooks that remain true and are quickly grounded by evidence. Avoid stiff titles like `某某项目案例` unless used only as a fallback.
+   - Before finalizing the cover title, first-frame title, opening line, narration body, subtitle highlights, or platform copy, create a punchy packaging layer: at least 3 `玩梗标题`, 3 `反差标题`, and 3 `干货标题`. Prefer funny, meme-friendly hooks that remain true and are quickly grounded by evidence. Avoid stiff titles like `某某项目案例` unless used only as a fallback.
+   - Carry the same `谈笑中讲干货` voice through the whole script, not only the title. Use quoted playful phrases such as `“全家桶”`, `“一人公司”`, `“AI 部门”`, or `“岗位表”` to signal entertainment framing, then explain the real workflow value with evidence.
    - Before rendering, define a production gate in the brief: `hook`, `why_watch`, `real_case_flow`, `proof_moment`, `cover_hook`, `cta`, and `creator_signature`.
    - The final 3-6 seconds must include a recognizable creator signature: who is speaking, what the account focuses on, and a closing line. For this user's series, default to: `我是凸先生，专注 AI 全栈流程，我们下次再见！`
    - Do not proceed to final render if the script has no strong first-3-second hook, no real case flow, no proof moment, no CTA, or no creator signature.
@@ -239,7 +240,7 @@ Before final response, confirm these are true:
 - The small note `纯干货分享，不存在站外引流` appears in an unobtrusive non-subtitle area and does not cover evidence or IP elements.
 - The three IP forms appear and move in meaningful roles.
 - The first 3 seconds contain a concrete hook, not a generic topic label.
-- The cover title, opening line, and platform titles include a punchy or funny hook while staying evidence-backed and platform-safe.
+- The cover title, opening line, narration body, subtitle highlights, and platform copy include a punchy or funny hook while staying evidence-backed and platform-safe.
 - The video includes a real or representative usage flow and at least one readable evidence card.
 - The final seconds include the creator signature/account positioning and a clear closing line.
 - The platform publishing pack includes Douyin, WeChat Channels, and Xiaohongshu copy plus compliance notes.

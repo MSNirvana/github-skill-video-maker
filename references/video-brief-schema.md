@@ -32,6 +32,7 @@ Required top-level fields:
 - `publishing_pack`: platform copy requirements and expected output filename
 - `beginner_clarity`: plain-language explanation gate for non-expert viewers
 - `script_strategy`: content angle, HKR score, micro-story, human voice, and anti-AI-fluff checks
+- `viral_packaging`: title/opening packaging layer with meme, contrast, and practical title candidates
 - `subtitle_strategy`: dual-layer subtitle plan with insight subtitles and complete line subtitles
 - `platform_safety_note`: the unobtrusive on-video note `纯干货分享，不存在站外引流`, including placement and overlap checks
 
@@ -132,6 +133,17 @@ Line subtitle timing rule:
 - Do not derive line subtitle timestamps only from storyboard scene ranges, text length, paragraph boundaries, or earlier draft audio.
 - Regenerate or re-align line subtitles whenever narration text, TTS provider, voice type, speech rate, or audio editing changes.
 - Each `line_subtitles` item should include start/end timing from the final audio and text that matches the spoken line closely enough for silent viewing.
+
+Recommended `viral_packaging` fields:
+
+- `meme_titles`: at least 3 funny or meme-like titles
+- `contrast_titles`: at least 3 contradiction/curiosity titles
+- `practical_titles`: at least 3 clearer search-friendly titles
+- `recommended_title`: the strongest title that is funny but true
+- `opening_line`: the first spoken line or first-frame line that earns attention
+- `factual_anchor`: repo name, Star count, role count, install command, or file evidence used to ground the hook
+- `boundary_clarifier`: short line that narrows any playful exaggeration, such as `不是一键替你干完所有活，而是把常用角色和流程打包好`
+- `qa`: checks for no false guarantees, no fake official endorsement, and beginner clarity
 
 The final edit should also keep a `visual-manifest.json` with the same scene ids. Use `scripts/validate_visual_manifest.py` before delivery.
 

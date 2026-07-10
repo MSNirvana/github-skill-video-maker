@@ -27,25 +27,38 @@ For each finished video, provide a Markdown publishing pack with:
 
 Douyin:
 
-- Lead with a concrete pain or contradiction in the first line.
+- Lead with a concrete pain, contradiction, or meme-like hook in the first line.
 - Keep body copy short and scannable.
 - Use a clear follow/comment CTA.
 - Include AI-assisted disclosure when the video uses AI narration, generated visuals, voice cloning, or synthetic characters.
 - Avoid wording that implies platform manipulation, guaranteed earnings, academic cheating, medical/legal/financial certainty, or bypassing review.
+- Title options should include at least one `玩梗标题`, one `反差标题`, and one `干货标题`. Prefer the punchiest truthful option as the recommended title.
 
 WeChat Channels:
 
-- Use slightly calmer, trust-building copy.
+- Use slightly calmer, trust-building copy, but do not become a product manual. A light joke or contrast is allowed if the body quickly anchors it with evidence.
 - Mention source and capture date when discussing GitHub Stars.
 - Encourage comments, follows, and forwarding rather than aggressive conversion.
 - Avoid unsupported authority claims such as official endorsement, guaranteed outcome, or certified effectiveness.
 
 Xiaohongshu:
 
-- Use searchable practical titles, not pure clickbait.
+- Use searchable practical titles with a conversational hook, not pure clickbait.
 - Make the body feel like a useful note: what it is, who it helps, what it cannot do.
 - Add collection/comment CTA.
 - Avoid exaggerated “种草” claims, absolute superlatives, fake personal experience, and unsupported before/after results.
+
+## Viral But Safe Title Rules
+
+- Good: `一人公司？一个 Skill 全家桶全搞定！`
+- Good: `别让一个 AI 演完整家公司`
+- Good: `不是模型不行，是你没给 AI 分工`
+- Risky unless narrowed immediately: `全自动搞定`, `一键做完`, `躺着起飞`
+- Bad: `稳赚`, `100%`, `官方推荐`, `绕过审核`, `保过`
+
+Use the hook to earn attention, then use the body copy to clarify boundaries:
+
+`这里的“全家桶”不是替你一键完成所有工作，而是把常用角色、流程和安装方式打包好。`
 
 ## High-Risk Terms
 

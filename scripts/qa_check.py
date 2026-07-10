@@ -149,6 +149,7 @@ def main() -> int:
         "manual_checks": [
             "Confirm subtitles are visible throughout the rendered video.",
             "Confirm highlights point to the exact target being discussed.",
+            "Confirm title/opening/publishing copy has a funny or surprising hook without unsupported claims.",
             "Confirm all three IP roles appear in meaningful contexts.",
             "Confirm no unrelated elements overlap screenshots, subtitles, Star badges, or IP characters.",
             "Confirm the video does not rely on fake human screencast signals such as decorative cursors, fake clicks, fake scrolling, or fake text selection.",

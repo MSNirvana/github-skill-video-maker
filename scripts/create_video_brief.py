@@ -131,6 +131,21 @@ def main() -> int:
             "jargon_translations": {},
             "so_what_beats": [],
         },
+        "viral_packaging": {
+            "meme_titles": [],
+            "contrast_titles": [],
+            "practical_titles": [],
+            "recommended_title": "",
+            "opening_line": "",
+            "factual_anchor": "",
+            "boundary_clarifier": "",
+            "qa": {
+                "funny_or_surprising": False,
+                "no_false_guarantee": False,
+                "no_fake_official_endorsement": False,
+                "grounded_by_evidence_in_first_10_seconds": False,
+            },
+        },
         "subtitle_strategy": {
             "mode": "dual-layer",
             "insight_subtitles": [],

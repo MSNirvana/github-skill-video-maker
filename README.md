@@ -12,6 +12,7 @@ This repository is a Codex Skill. It packages a repeatable production workflow f
 - Cover image using the same visual system
 - Optional image2 key art for covers, first frames, chapter posters, and branded end cards
 - Narration script and narration audio
+- Meme-style, contrast-style, and practical title candidates, with a recommended punchy-but-true title
 - A small non-subtitle note: `纯干货分享，不存在站外引流`
 - Preview sheet/contact sheet
 - Visual manifest for screenshot and highlight verification
@@ -66,6 +67,8 @@ Target audience: AI users.
 The skill will guide Codex to research the repository, capture real screenshots, create a structured brief, render a video package, and generate a platform publishing pack.
 
 The skill does not fake human screencasts. Decorative cursors, fake clicks, fake scrolling, and fake text selection should be omitted unless they come from real recorded interaction or serve a concrete evidence-pointing purpose.
+
+Titles and openings should be funny or surprising enough to earn attention, but they must be grounded by real evidence such as screenshots, Star counts, files, commands, or workflow artifacts.
 
 ## Scripted Pipeline
 

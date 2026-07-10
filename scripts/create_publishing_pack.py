@@ -18,6 +18,43 @@ def date_only(value: str) -> str:
         return value[:10]
 
 
+def title_pack(brief: dict, full_name: str, stars: str) -> dict[str, str]:
+    cover_hook = brief.get("cover_hook") or brief.get("hook", {}).get("first_3_seconds") or full_name
+    plain = (brief.get("beginner_clarity") or {}).get("plain_definition", "")
+    lower_context = " ".join([full_name, cover_hook, plain]).lower()
+
+    if "agent" in lower_context or "agents" in lower_context:
+        meme = "一人公司？一个 Skill 全家桶全搞定！"
+        contrast = "别让一个 AI 演完整家公司"
+        practical = "把 AI 助手拆成一支专家团队"
+        boundary = "这里的“全家桶”不是一键替你干完所有活，而是把常用角色、流程和安装方式打包好。"
+    elif "writing" in lower_context or "writer" in lower_context or "写作" in lower_context:
+        meme = "别让 AI 上来就开写，先把证据摆桌上"
+        contrast = "不是写得慢，是流程太野"
+        practical = "用 Skill 把写作流程先管起来"
+        boundary = "这里不是代写终稿，而是把选题、证据、结构和修改流程管清楚。"
+    elif "frontend" in lower_context or "design" in lower_context or "前端" in lower_context:
+        meme = "别让 AI 把页面做成精神小伙装修"
+        contrast = "不是不会写代码，是没人管设计边界"
+        practical = "用 Skill 约束前端设计流程"
+        boundary = "这里不是保证一键出神图，而是把视觉规则、组件边界和交付步骤说清楚。"
+    else:
+        meme = f"{cover_hook}，这不比硬背提示词香？"
+        contrast = "不是工具不行，是流程没人管"
+        practical = f"{cover_hook}｜GitHub Skill 案例"
+        boundary = "这里不是承诺一键完成所有结果，而是拆解一个开源项目的真实流程和边界。"
+
+    star_title = f"{stars} Stars 的项目，先别急着收藏" if stars else "这个 GitHub 项目，先别急着收藏"
+    return {
+        "meme": meme,
+        "contrast": contrast,
+        "practical": practical,
+        "star": star_title,
+        "recommended": meme,
+        "boundary": boundary,
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Create Douyin/WeChat Channels/Xiaohongshu publishing copy.")
     parser.add_argument("--brief", required=True)
@@ -37,6 +74,7 @@ def main() -> int:
     why_watch = brief.get("why_watch") or "看一个开源 AI Skill 如何解决真实工作流问题。"
     signature = (brief.get("creator_signature") or {}).get("closing_line", "我是凸先生，专注 AI 全栈流程，我们下次再见！")
     disclosure = "本视频为 AI 辅助创作，含 AI 配音/动画包装；项目数据以制作时公开页面截图为准，不构成官方背书。"
+    titles = title_pack(brief, full_name, stars)
     source_note = f"项目：{repo_url or full_name}。GitHub Star 数为制作时截图数据"
     if stars:
         source_note += f"：{stars}"
@@ -44,9 +82,9 @@ def main() -> int:
         source_note += f"（{captured}）"
     source_note += "。"
 
-    douyin_title = f"{cover_hook}，先看这个 GitHub Skill"
-    channels_title = f"{full_name}：一个 AI 写作流程案例"
-    xhs_title = f"{cover_hook}｜GitHub Skill 案例"
+    douyin_title = titles["recommended"]
+    channels_title = titles["contrast"]
+    xhs_title = titles["practical"]
 
     text = f"""# Publishing Pack
 
@@ -70,14 +108,18 @@ AI 辅助声明：{disclosure}
 标题备选：
 
 1. {douyin_title}
-2. 别急着让 AI 输出，先让它守流程
-3. 一个有 {stars or 'Star'} Stars 的 AI Skill，解决的不是“写”，是“管”
+2. {titles["contrast"]}
+3. {titles["star"]}
 
 推荐标题：{douyin_title}
 
 正文：
 
+{titles["meme"]}
+
 {why_watch}
+
+{titles["boundary"]}
 
 它的重点不是替你完成结果，而是把任务拆成流程、记录和证据约束。
 
@@ -101,14 +143,16 @@ AI 辅助声明：{disclosure}
 标题备选：
 
 1. {channels_title}
-2. AI 工具真正该补的，是流程和证据
-3. 从 GitHub 项目看一个 AI 全栈流程案例
+2. {titles["meme"]}
+3. {titles["practical"]}
 
 推荐标题：{channels_title}
 
 正文：
 
 这期拆的是 {full_name}。
+
+{titles["boundary"]}
 
 我更关注它背后的工作流：先判断任务，再生成结构、记录进度、约束证据，而不是直接给一个看似完整的结果。
 
@@ -131,14 +175,16 @@ AI 辅助声明：{disclosure}
 标题备选：
 
 1. {xhs_title}
-2. AI 不要直接出结果，先给它加流程
-3. 一个适合收藏的 GitHub Skill 工作流案例
+2. {titles["meme"]}
+3. {titles["contrast"]}
 
 推荐标题：{xhs_title}
 
 正文：
 
 今天记录一个 GitHub Skill 案例：{full_name}
+
+{titles["boundary"]}
 
 我觉得它有价值的地方不是“更快生成”，而是：
 

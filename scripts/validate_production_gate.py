@@ -80,6 +80,21 @@ def validate_production_gate(brief: dict[str, Any]) -> dict[str, Any]:
     if len(beginner.get("so_what_beats", []) or []) < 4:
         failures.append("beginner_clarity.so_what_beats should include at least 4 viewer-value beats")
 
+    viral = brief.get("viral_packaging", {}) or {}
+    if len(viral.get("meme_titles", []) or []) < 3:
+        failures.append("viral_packaging.meme_titles should include at least 3 funny title candidates")
+    if len(viral.get("contrast_titles", []) or []) < 3:
+        failures.append("viral_packaging.contrast_titles should include at least 3 contrast/curiosity title candidates")
+    if len(viral.get("practical_titles", []) or []) < 3:
+        failures.append("viral_packaging.practical_titles should include at least 3 practical/search-friendly title candidates")
+    for field in ["recommended_title", "opening_line", "factual_anchor", "boundary_clarifier"]:
+        if _blank(viral.get(field)):
+            failures.append(f"viral_packaging.{field} is required")
+    viral_qa = viral.get("qa", {}) or {}
+    for field in ["funny_or_surprising", "no_false_guarantee", "no_fake_official_endorsement", "grounded_by_evidence_in_first_10_seconds"]:
+        if viral_qa.get(field) is not True:
+            failures.append(f"viral_packaging.qa.{field} must be true")
+
     subtitles = brief.get("subtitle_strategy", {})
     if subtitles.get("mode") != "dual-layer":
         failures.append("subtitle_strategy.mode must be dual-layer")

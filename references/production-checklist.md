@@ -109,7 +109,7 @@
 - Keep generated artwork consistent with the user's IP: black/red energy, laser/infinity-eye motif, white/black IP roles, tech/workflow atmosphere.
 - Prefer text-light prompts with reserved space for Remotion overlays.
 - Never ask image2 to invent GitHub Star counts, repo UI, code snippets, user results, platform logos, or factual evidence.
-- Store generated assets in `work/<slug>/image2/` and copy final user-facing key art to `outputs/` or the final delivery folder.
+- Store generated assets in `work/<slug>/image2/` and copy final user-facing key art to `outputs/` only when needed. Do not copy key art to the final desktop delivery folder unless the user explicitly asks for cover/key-art files.
 - Record `generation_model`, `prompt`, `negative_prompt`, `intended_use`, `source_references`, `text_verified`, and `factual_claims_allowed` in the visual manifest.
 - Add AI-assisted disclosure to publishing copy whenever generated key art appears in the final video or cover.
 
@@ -122,7 +122,7 @@
 
 ## Delivery Bundle
 
-Save final user-facing files in `outputs/`:
+Keep production and QA files in `work/` or `outputs/` as needed:
 
 - `<project>-case-90s-vertical.mp4`
 - `<project>-case-cover.png`
@@ -130,6 +130,13 @@ Save final user-facing files in `outputs/`:
 - `<project>-case-narration.mp3`
 - `<project>-case-preview-sheet.jpg`
 - `<project>-publishing-pack.md`
+
+Archive only the two production-account deliverables to the user's desktop folder by default:
+
+- `<project>-case-90s-vertical.mp4`
+- `<project>-publishing-pack.md`
+
+Do not copy cover images, preview sheets, narration text/audio, subtitle files, briefs, manifests, QA reports, screenshots, or source files into `/Users/gaoyunhong/Desktop/凸先生/视频素材/<YYYYMMDD> <SkillName>` unless the user explicitly asks for them.
 
 ## Platform Publishing Pack
 

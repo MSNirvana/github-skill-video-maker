@@ -9,18 +9,19 @@ description: Create branded vertical explainer videos for GitHub repositories, C
 
 Create a polished vertical explainer video that feels like a clear evidence-based explanation, not a text-heavy slide deck or a fake human screencast.
 
-Default output:
+Production output:
 
 - `1080x1920`, `30fps`, about `90s`, H.264 MP4 with AAC audio
-- A separate cover image using the same visual system
+- A separate cover image using the same visual system when needed for QA, first-frame design, or an explicitly requested cover export
 - Optional `image2` key-art assets for production-grade covers, first frames, chapter openers, and branded end cards
 - Narration script and generated narration audio
 - Dual-layer Chinese subtitles: a short on-screen insight label plus complete line-by-line narration subtitles
 - A small platform-safety note in an unobtrusive non-subtitle area: `纯干货分享，不存在站外引流`
 - Preview sheet of key frames
 - A platform publishing pack for Douyin, WeChat Channels, and Xiaohongshu
-- All user-facing deliverables saved in the thread `outputs/` directory
-- When archiving final deliverables for this user's production account, copy them to `/Users/gaoyunhong/Desktop/凸先生/视频素材/<YYYYMMDD> <SkillName>`; use the Skill/project name after the date, for example `20260710 Claude-video`, and do not add daily sequence numbers.
+- Internal production files may include cover images, preview sheets, narration text/audio, subtitle files, briefs, visual manifests, QA reports, screenshots, and Remotion source. Keep these in `work/` or `outputs/` for rebuild and QA, but do not treat them as final desktop deliverables unless the user explicitly asks.
+- Final desktop delivery defaults to only two files: the final `.mp4` video and the platform publishing pack `.md`.
+- When archiving final deliverables for this user's production account, copy only those two files to `/Users/gaoyunhong/Desktop/凸先生/视频素材/<YYYYMMDD> <SkillName>`; use the Skill/project name after the date, for example `20260710 Claude-video`, and do not add daily sequence numbers.
 
 ## Required Workflow
 
@@ -251,7 +252,7 @@ Before final response, confirm these are true:
 - The video includes a real or representative usage flow and at least one readable evidence card.
 - The final seconds include the creator signature/account positioning and a clear closing line.
 - The platform publishing pack includes Douyin, WeChat Channels, and Xiaohongshu copy plus compliance notes.
-- The output video, cover, narration text, narration audio, preview sheet, and publishing pack are in `outputs/`.
+- The output video and publishing pack are present. Internal QA/build files such as cover, narration text/audio, preview sheet, subtitles, brief, manifest, and reports may stay in `work/` or `outputs/`, but the final desktop delivery folder contains only the `.mp4` and publishing pack `.md` unless the user explicitly requests more.
 
 For detailed production notes, read `references/production-checklist.md`.
 

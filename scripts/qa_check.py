@@ -11,6 +11,8 @@ from pathlib import Path
 
 from validate_production_gate import validate_production_gate
 from validate_visual_manifest import validate_manifest
+from platform_safety import result_payload as platform_safety_payload
+from platform_safety import scan_brief, scan_text
 
 
 def ffprobe(path: Path) -> dict:
@@ -62,6 +64,7 @@ def main() -> int:
     parser.add_argument("--preview", default="", help="Explicit preview sheet path")
     parser.add_argument("--publishing-pack", default="", help="Explicit platform publishing pack Markdown path")
     parser.add_argument("--visual-manifest", default="", help="Optional visual manifest JSON path")
+    parser.add_argument("--platform-text", action="append", default=[], help="Narration, SRT, renderer source, or other public text to scan; repeat as needed")
     parser.add_argument("--production-gate", action="store_true", help="Validate production account gate fields")
     args = parser.parse_args()
 
@@ -113,6 +116,7 @@ def main() -> int:
         failures.append("Brief does not contain a GitHub Star count")
 
     pack_path = expected.get("publishing_pack")
+    platform_safety_findings = scan_brief(brief, "brief public text")
     if pack_path and pack_path.exists():
         pack_text = pack_path.read_text(encoding="utf-8", errors="ignore")
         for required in ["抖音", "视频号", "小红书", "AI", "置顶评论"]:
@@ -120,6 +124,21 @@ def main() -> int:
                 failures.append(f"Publishing pack missing required section/text: {required}")
         if "High-Risk Wording Checklist" not in pack_text and "高风险" not in pack_text:
             failures.append("Publishing pack missing high-risk wording checklist")
+        platform_safety_findings.extend(scan_text(pack_text, str(pack_path)))
+    for raw_path in args.platform_text:
+        platform_path = Path(raw_path)
+        if not platform_path.exists():
+            platform_safety_findings.append(
+                {"label": str(platform_path), "risk": "missing file", "match": "", "snippet": "File does not exist"}
+            )
+            continue
+        platform_safety_findings.extend(
+            scan_text(platform_path.read_text(encoding="utf-8", errors="ignore"), str(platform_path))
+        )
+    for finding in platform_safety_findings:
+        failures.append(
+            f"Platform safety: {finding['risk']} in {finding['label']}: {finding['match']} ({finding['snippet']})"
+        )
 
     production_gate_result = None
     if args.production_gate:
@@ -145,6 +164,7 @@ def main() -> int:
         "media": media,
         "production_gate": production_gate_result,
         "visual_manifest": visual_manifest_result,
+        "platform_safety": platform_safety_payload(platform_safety_findings),
         "failures": failures,
         "manual_checks": [
             "Confirm subtitles are visible throughout the rendered video.",
@@ -153,7 +173,9 @@ def main() -> int:
             "Confirm all three IP roles appear in meaningful contexts.",
             "Confirm no unrelated elements overlap screenshots, subtitles, Star badges, or IP characters.",
             "Confirm the video does not rely on fake human screencast signals such as decorative cursors, fake clicks, fake scrolling, or fake text selection.",
-            "Confirm the small note `纯干货分享，不存在站外引流` appears in an unobtrusive non-subtitle area.",
+            "Confirm the video does not use anti-evasion copy containing `站外` or `引流`; use the platform's native AI label or the neutral label `AI 辅助创作` only when needed.",
+            "Confirm cover, screenshots, narration, subtitles, and publishing copy contain no raw URL/domain, QR/contact details, third-party download/install directions, or comments/profile/private-message delivery language.",
+            "Confirm public screenshot crops remove address bars, clone/download controls, package-install commands, QR codes, and unrelated outbound calls to action.",
             "Confirm platform publishing copy matches current platform policies and avoids unsafe claims.",
         ],
     }

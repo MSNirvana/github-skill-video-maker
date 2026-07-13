@@ -17,11 +17,13 @@ Record the review date when policy-sensitive advice is included.
 
 For each finished video, provide a Markdown publishing pack with:
 
-- Asset list: video, cover, preview, narration text, source repo URL, Star count/capture date
+- Asset list: video, cover, preview, narration text, source project name, Star count/capture date. Keep the raw source URL in internal work metadata, not in public platform copy.
 - Global positioning: one-sentence account positioning and content boundary
 - Platform sections for Douyin, WeChat Channels, and Xiaohongshu
 - For each platform: title options, recommended title, body copy, hashtags/topics, pinned comment, AI-assisted disclosure, source/date note, risk notes
 - Cross-platform high-risk wording checklist
+
+Default all three platform sections to `strict_platform_safe`: the published title, body, hashtags, pinned comment, cover, subtitles, and spoken CTA must keep the viewer inside the platform.
 
 ## Platform Guidance
 
@@ -34,6 +36,7 @@ Douyin:
 - Avoid wording that implies platform manipulation, guaranteed earnings, academic cheating, medical/legal/financial certainty, or bypassing review.
 - Title options should include at least one `玩梗标题`, one `反差标题`, and one `干货标题`. Prefer the punchiest truthful option as the recommended title.
 - Body copy should keep the same playful voice as the title. Use quoted meme phrases like `“全家桶”` or `“一人公司”` to signal light entertainment, then explain the real workflow value.
+- Do not place a repository URL, project address, QR code, download/install direction, or comments/profile/private-message delivery promise in the title, body, hashtags, or pinned comment.
 
 WeChat Channels:
 
@@ -42,6 +45,7 @@ WeChat Channels:
 - Mention source and capture date when discussing GitHub Stars.
 - Encourage comments, follows, and forwarding rather than aggressive conversion.
 - Avoid unsupported authority claims such as official endorsement, guaranteed outcome, or certified effectiveness.
+- Keep source attribution to project name, source type, Star count, and capture date. Do not tell viewers to leave the platform or obtain the project elsewhere.
 
 Xiaohongshu:
 
@@ -50,6 +54,7 @@ Xiaohongshu:
 - Keep the note lively: use analogies, quoted meme phrases, and mild roast, then list practical takeaways.
 - Add collection/comment CTA.
 - Avoid exaggerated “种草” claims, absolute superlatives, fake personal experience, and unsupported before/after results.
+- Do not use notes, comments, profile text, private messages, or other channels to distribute links, files, templates, prompts, or installation directions.
 
 ## Viral But Safe Title Rules
 
@@ -61,7 +66,7 @@ Xiaohongshu:
 
 Use the hook to earn attention, then use the body copy to keep the same fun-but-useful rhythm:
 
-`所谓“全家桶”，不是替你一键完成所有工作，而是把常用角色、流程和安装方式打包好。`
+`所谓“全家桶”，不是替你一键完成所有工作，而是把常用角色和流程整理成可复用的方法。`
 
 Avoid body copy that sounds like a product spec:
 
@@ -77,10 +82,21 @@ Rewrite or remove:
 - Illegal/copyright: `破解`, `盗版`, `搬运`, `洗稿`, `无授权素材`
 - Unverified guarantee: `100%`, `稳赚`, `无风险`, `官方推荐`, `全网第一`, `永久有效`
 - Sensitive-domain certainty: `诊断`, `法律结论`, `投资建议`, `保收益`
+- External routing: raw URLs/domains, project-address language, QR/contact details, comments/profile/private-message delivery, or instructions to leave the platform
+- Third-party action: public CTAs that tell viewers to download, install, clone, register for, open, or use another app, website, mini program, or plugin
 
 Prefer:
 
 - `流程管理`, `证据约束`, `辅助创作`, `开源项目案例`, `制作时截图数据`, `不替代专业判断`, `不是代写/不是终稿`
+- `收藏这条视频`, `关注下一期`, `评论你更想看哪个环节`, `资料来源为公开仓库页面`, `Star 数为制作时截图数据`
+
+## Public Source Note
+
+Use a non-actionable note such as:
+
+`资料来源：公开仓库 kangarooking/cangjie-skill；Star 数为 2026-07-13 制作时截图数据。`
+
+Do not include the raw URL or follow it with directions to search, visit, download, install, or obtain files. Keep the URL only in the internal production brief.
 
 ## Default Disclosure
 

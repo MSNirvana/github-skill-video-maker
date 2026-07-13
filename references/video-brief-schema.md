@@ -34,7 +34,9 @@ Required top-level fields:
 - `script_strategy`: content angle, HKR score, micro-story, human voice, and anti-AI-fluff checks
 - `viral_packaging`: title/opening packaging layer with meme, contrast, and practical title candidates
 - `subtitle_strategy`: dual-layer subtitle plan with insight subtitles and complete line subtitles
-- `platform_safety_note`: the unobtrusive on-video note `纯干货分享，不存在站外引流`, including placement and overlap checks
+- `platform_distribution_safety`: strict in-platform distribution mode, public-copy restrictions, screenshot-crop status, and final-scan QA
+- `platform_safety_note`: optional neutral AI disclosure; omit by default or use only `AI 辅助创作`
+- `model_routing`: planned strong-model, low-cost-model, and deterministic-tool routing for cost control
 
 Recommended storyboard scene ids:
 
@@ -44,14 +46,25 @@ Recommended storyboard scene ids:
 - `workflow`
 - `skills`
 - `deep-dive`
-- `install`
+- `compatibility`
 - `boundary`
 - `value`
 - `signature`
 
-Recommended `platform_safety_note` fields:
+Recommended `platform_distribution_safety` fields:
 
-- `text`: always `纯干货分享，不存在站外引流`
+- `mode`: default `strict_platform_safe`
+- `external_routing_free`: public content contains no raw URL/domain, QR/contact detail, project-address CTA, or directions to comments/profiles/private messages
+- `third_party_action_free`: public content contains no download/install/clone/register/open/use instruction for third-party software, apps, sites, plugins, or mini programs
+- `public_copy_url_free`: platform titles, body copy, pinned comments, hashtags, narration, and subtitles contain no raw URL/domain
+- `distribution_crops_verified`: public screenshot crops remove address bars, raw URLs, QR/contact details, clone/download controls, package-install commands, and unrelated outbound calls to action
+- `native_ai_label`: use the platform's native AI-content disclosure when required
+- `qa`: final text scan and manual cover/preview inspection booleans
+
+Recommended optional `platform_safety_note` fields:
+
+- `enabled`: boolean, default false
+- `text`: empty by default; if enabled, use only `AI 辅助创作`
 - `placement`: preferably `upper_right` or `upper_edge`
 - `style`: small, low-emphasis, readable, and visually secondary
 - `avoid_zones`: include `line_subtitle`, `insight_subtitle`, `evidence`, `star_badge`, and `ip`
@@ -68,6 +81,17 @@ Recommended `image2_strategy` fields:
 - `evidence_policy`: `generated_art_is_not_evidence`
 - `outputs`: generated asset paths
 - `qa`: checks for readable title zone, IP consistency, no fake UI, no fake Star count, no text errors, no evidence confusion
+
+Recommended `model_routing` fields:
+
+- `controller`: the current Codex conversation or orchestration surface that owns the full workflow
+- `strong_model_tasks`: high-leverage judgment steps that should stay on the strongest available reasoning model
+- `low_cost_model_tasks`: draftable or low-risk text tasks that can be delegated to cheaper external LLMs
+- `deterministic_tool_tasks`: local/API steps that should not spend LLM tokens
+- `external_providers`: configured external providers with `name`, `base_url`, `model`, and `status`; never store secret keys in the brief
+- `fallback_policy`: when to route a task back to the strong model
+- `cost_notes`: expected token-saving choices and quality tradeoffs
+- `qa`: checks that final facts, script, subtitles, visual evidence, and platform risk were reviewed by the strong model or manually verified
 
 Use the brief to prevent drift: the Star count in narration, cover, and visual badges should come from `repo.stars_label`; screenshot names should come from `screenshots`; final output filenames should match `required_outputs`. Generate custom final naming with `create_video_brief.py --output-prefix <prefix>` when producing versions or a branded series.
 

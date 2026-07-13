@@ -89,6 +89,8 @@ def main() -> int:
     # source material, not as truth; verify visually before final render.
     if crop(repo_png, out_dir / "github-repo-header.png", (0, 95, 1440, 245)):
         captures["repo_header"] = str(out_dir / "github-repo-header.png")
+    if crop(repo_png, out_dir / "github-repo-identity-stars.png", (0, 95, 1440, 185)):
+        captures["repo_identity_stars"] = str(out_dir / "github-repo-identity-stars.png")
     if crop(repo_png, out_dir / "github-star-actions.png", (930, 110, 1435, 205)):
         captures["star_actions"] = str(out_dir / "github-star-actions.png")
     if crop(repo_png, out_dir / "github-about-stars.png", (1010, 590, 1428, 875)):
@@ -110,7 +112,7 @@ def main() -> int:
         "chrome": chrome,
         "viewport": {"width": args.width, "height": args.height},
         "captures": captures,
-        "notes": "Verify all crops and highlight targets before final render.",
+        "notes": "Keep original captures for audit. Prefer repo_identity_stars for public distribution, then verify all final crops remove URLs, QR/contact details, clone/download/install controls, and unrelated outbound calls to action.",
     }
     manifest_path = out_dir / "screenshots-manifest.json"
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")

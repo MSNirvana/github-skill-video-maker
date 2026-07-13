@@ -16,7 +16,7 @@ Production output:
 - Optional `image2` key-art assets for production-grade covers, first frames, chapter openers, and branded end cards
 - Narration script and generated narration audio
 - Dual-layer Chinese subtitles: a short on-screen insight label plus complete line-by-line narration subtitles
-- A small platform-safety note in an unobtrusive non-subtitle area: `纯干货分享，不存在站外引流`
+- Strict in-platform distribution by default: no public URLs, QR codes, account/contact handles, third-party download or installation directions, or language that sends viewers to comments, profiles, private messages, websites, apps, or mini programs
 - Preview sheet of key frames
 - A platform publishing pack for Douyin, WeChat Channels, and Xiaohongshu
 - Internal production files may include cover images, preview sheets, narration text/audio, subtitle files, briefs, visual manifests, QA reports, screenshots, and Remotion source. Keep these in `work/` or `outputs/` for rebuild and QA, but do not treat them as final desktop deliverables unless the user explicitly asks.
@@ -37,10 +37,12 @@ Production output:
    - For every screenshot or crop that reaches the final edit, record `scene_id`, `source_url_or_path`, `narration_claim`, `target_region`, and `why_this_screenshot` in a visual manifest.
    - If the key text or UI target is unreadable in vertical video, create a tighter crop or redraw it as a readable evidence card; do not keep the unreadable screenshot as filler.
    - Keep factual evidence real. Do not use image generation to fabricate GitHub pages, Star counts, repository UI, command output, benchmark results, or product screenshots.
+   - Keep the original screenshot internally for evidence, then create a distribution-safe crop for the final edit. The public crop must omit browser addresses, raw URLs, QR codes, contact details, clone/download/install controls, and unrelated third-party calls to action. Preserve the project name, Star count, and exact evidence being discussed.
 
 3. Write a low-text case script.
-   - Use this structure unless the user gives a better one: pain point -> project identity -> real workflow -> key capabilities -> install/support -> boundary -> value.
+   - Use this structure unless the user gives a better one: pain point -> project identity -> real workflow -> key capabilities -> compatibility/boundary -> value.
    - Read `references/script-writing-methodology.md` before writing narration, cover hooks, insight subtitles, or publishing copy.
+   - Read `references/platform-risk-guardrails.md` before writing any narration, subtitle, CTA, cover, screenshot title, or publishing copy intended for Douyin, WeChat Channels, or Xiaohongshu.
    - Define a `script_strategy` in the brief before drafting: `core_angle`, `viewer_doubt`, `plain_answer`, `hkr_score`, `micro_story`, `human_voice_rules`, `anti_ai_fluff_scan`, and `escalation_beats`.
    - Treat the repo as evidence for a human problem. Do not write a README summary or a feature list unless the viewer pain and workflow value are already clear.
    - Use a compact story arc: challenge -> evidence -> process -> result -> boundary -> signature.
@@ -57,6 +59,7 @@ Production output:
    - Before rendering, define a production gate in the brief: `hook`, `why_watch`, `real_case_flow`, `proof_moment`, `cover_hook`, `cta`, and `creator_signature`.
    - The final 3-6 seconds must include a recognizable creator signature: who is speaking, what the account focuses on, and a closing line. For this user's series, default to: `我是凸先生，专注 AI 全栈流程，我们下次再见！`
    - Do not proceed to final render if the script has no strong first-3-second hook, no real case flow, no proof moment, no CTA, or no creator signature.
+   - Keep the CTA entirely in-platform: follow, save this video, comment on the topic, or watch the next episode. Do not tell viewers where to obtain the project, how to leave the platform, or how to install/download/use third-party software.
 
 4. Build the video.
    - Use Remotion or an equivalent code-driven renderer for predictable motion.
@@ -73,7 +76,8 @@ Production output:
    - Verify highlights against exported frames or a preview sheet after all motion, scaling, and cropping are applied, not only against the source screenshot.
    - Reserve stable zones for header/title, evidence screenshots, subtitles, IP characters, Star badges, and callouts. Do not let decorative or unrelated elements overlap evidence, subtitles, or each other.
    - Keep the entire bottom subtitle stack visually clean. Do not place persistent presenter avatars, large IP badges, or decorative characters beside, behind, or between the insight subtitle and line subtitle. Use the proven series layout where the bottom safe area belongs to subtitles only; IP characters should sit near evidence or callouts above the subtitle band.
-   - Add a small, low-emphasis text note `纯干货分享，不存在站外引流` in an inconspicuous safe area such as the upper-right corner or upper edge. It must not sit near the bottom line subtitles, must not cover GitHub evidence, Star badges, IP characters, or key labels, and should remain readable but visually secondary.
+   - Do not place anti-evasion wording such as `纯干货分享，不存在站外引流` on screen. It does not neutralize risky content and may itself trigger review. Use the platform's native AI-content disclosure when required; an optional on-video label may say only `AI 辅助创作`.
+   - Do not show raw URLs, domains, QR codes, contact/account handles, browser address bars, repository clone/download controls, package-install commands, or directions to comments/profiles/private messages. Crop, mask, or replace them with a factual evidence card that keeps only the project name, Star count, source label, and claim-relevant text.
    - Treat `image2` as an optional upgrade, not a default requirement. Use it only when it clearly improves account identity, cover click value, and viewer comprehension compared with the baseline Remotion/IP/screenshot visual system. If generated art feels generic, weakens the IP, reduces clarity, or creates style discontinuity, skip it or revert to the baseline system.
    - Prefer generating image2 art as text-light or text-free backgrounds with reserved title zones, then overlay exact Chinese titles, project names, Star counts, and platform-safe text in Remotion. If image2 renders text inside the artwork, inspect it manually; regenerate or cover it with Remotion text if any character is wrong.
    - Record every generated key-art asset in the visual manifest with `generation_model`, `prompt`, `intended_use`, `factual_claims_allowed: false`, and `text_verified`.
@@ -93,7 +97,7 @@ Production output:
    - Use all three bundled IP roles when the video is long enough:
      - `head`: insight, pain point, warning, conclusion
      - `route`: workflow, connection, process, platform support
-     - `key`: install, access, unlock, API/key concepts
+     - `key`: artifact, access concept, compatibility, output, or decision point; do not use it to encourage third-party installation/download in a public-platform video
    - Animate IP characters with motion-design techniques: entrance, bobbing, tilt, glow pulse, route drawing, unlock ring, or pointing/callout behavior.
    - IP must participate in the explanation, not sit as decoration.
    - IP must never occupy the bottom subtitle stack. If an IP character makes the line subtitles, insight subtitles, or bottom composition feel crowded, move it above the subtitle band or remove it. A clean subtitle area is more important than showing an extra character.
@@ -114,12 +118,23 @@ Production output:
    - For AI-assisted videos, include a clear AI-assisted creation note when the platform or content context calls for it.
    - For GitHub claims, include the capture date for Star counts and avoid treating open-source popularity as product endorsement.
    - Read `references/platform-publishing-pack.md` when preparing platform copy or policy notes.
+   - Keep source URLs only in internal work metadata. Public titles, body copy, pinned comments, and hashtags may name the project and source type, but must not contain raw URLs, project-address language, download/install directions, or directions to comments/profiles/private messages for obtaining anything.
 
 9. Validate before delivery.
    - Run media checks with `ffprobe`.
    - Export a preview sheet from the final MP4.
    - Inspect key frames for text density, wrong highlights, missing Star count, missing subtitles, IP overlap, platform-safe subtitle placement, and unrelated element occlusion.
    - Confirm the platform publishing pack exists and avoids high-risk wording for the target platforms.
+   - Run the external-channel safety scanner on the final brief, narration, subtitles, publishing pack, and Remotion/render source. Treat any finding as blocking:
+
+```bash
+python3 <skill>/scripts/validate_platform_safety.py \
+  --brief work/<slug>/video-brief.json \
+  --text outputs/<project>-case-narration.txt \
+  --text outputs/<project>-case-subtitles.srt \
+  --text work/<slug>/<project>.tsx \
+  --text outputs/<project>-publishing-pack.md
+```
    - Run visual-manifest validation when a manifest is produced:
 
 ```bash
@@ -188,6 +203,19 @@ python3 <skill>/scripts/create_publishing_pack.py \
 
 The scripts are intentionally conservative. They produce metadata, screenshots, crops, brief/storyboard JSON, production-gate checks, visual-manifest checks, and QA reports; the agent still chooses the final edit, exact captions, and visual rhythm.
 
+## Model Routing and Cost Control
+
+The same Codex conversation can act as the production controller for the whole video workflow: research, script, TTS calls, screenshots, Remotion rendering, FFmpeg checks, QA, and publishing copy. Within that workflow, model choice is a routing decision:
+
+- Use the strongest available reasoning model for high-leverage judgment: repo research, fact interpretation, first-15-second hook, final narration strategy, platform-risk review, screenshot/evidence selection, visual QA, and nontrivial Remotion fixes.
+- Use lower-cost external LLMs for draftable work: README summaries, title candidates, publishing-copy first drafts, subtitle chunk drafts, visual asset lists, and first-pass sensitive-word scans.
+- Use deterministic local tools instead of LLMs whenever possible: GitHub metadata fetching, screenshot capture, crop/contact-sheet generation, audio conversion, SRT alignment from final audio, `ffprobe`, Remotion rendering, file copying, and manifest validation.
+- Doubao BigTTS or other speech providers are narration/audio services, not script reasoning models. Treat voice changes as audio changes: regenerate or re-align subtitles after final TTS.
+- Do not claim that the active Codex model can be dynamically replaced unless the current Codex session explicitly exposes model switching. External model calls are allowed only when API `base_url`, key, and model name are configured and reachable.
+- If an external model is unavailable, too weak for the task, or changes factual meaning, route that step back to the stronger model and record the reason in the brief.
+
+Each production brief should include a `model_routing` section that records planned model tiers, external providers, deterministic steps, fallbacks, and cost notes. The goal is to save tokens on repeatable drafting and machine work while keeping the account-facing quality gates on a strong model.
+
 ## Visual System
 
 Use the bundled IP assets in `assets/ip/`:
@@ -245,7 +273,9 @@ Before final response, confirm these are true:
 - Every red box/circle/arrow is anchored to an explicit target in the visual manifest and verified on an exported frame after render.
 - Screenshots stay clean whenever highlight placement is uncertain; no decorative or confidence-free red marks are allowed.
 - The video does not fake a human screencast with decorative cursors or fake interaction.
-- The small note `纯干货分享，不存在站外引流` appears in an unobtrusive non-subtitle area and does not cover evidence or IP elements.
+- No anti-evasion note uses `站外` or `引流`; use the platform's native disclosure or the neutral label `AI 辅助创作` only when needed.
+- The public video, cover, narration, subtitles, and publishing copy contain no raw URL, QR code, contact handle, download/install instruction, project-address CTA, or direction to comments/profiles/private messages for obtaining anything.
+- GitHub evidence uses distribution-safe crops: project identity and Star proof remain visible while address bars, raw URLs, clone/download controls, package-install commands, QR codes, and unrelated calls to action are removed.
 - The three IP forms appear and move in meaningful roles.
 - The first 3 seconds contain a concrete hook, not a generic topic label.
 - The cover title, opening line, narration body, subtitle highlights, and platform copy include a punchy or funny hook while staying evidence-backed and platform-safe.
@@ -261,3 +291,5 @@ For script angle, HKR scoring, micro-story structure, and anti-AI-fluff checks, 
 For the structured JSON format, read `references/video-brief-schema.md`.
 
 For platform copy and compliance notes, read `references/platform-publishing-pack.md`.
+
+For external-channel, third-party-action, screenshot-crop, CTA, and final-scan rules, read `references/platform-risk-guardrails.md`.

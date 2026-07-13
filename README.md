@@ -13,7 +13,7 @@ This repository is a Codex Skill. It packages a repeatable production workflow f
 - Optional image2 key art for covers, first frames, chapter posters, and branded end cards
 - Narration script and narration audio
 - Meme-style, contrast-style, and practical title candidates, with narration/body copy that keeps the same funny-but-useful voice
-- A small non-subtitle note: `纯干货分享，不存在站外引流`
+- Strict in-platform distribution: public video/copy omits URLs, QR/contact details, third-party action directions, and comment/profile/private-message delivery language
 - Preview sheet/contact sheet
 - Visual manifest for screenshot and highlight verification
 - Image2 key-art manifest records prompts, intended use, text verification, and evidence boundaries
@@ -31,6 +31,7 @@ github-skill-video-maker/
 ├── references/
 │   ├── image2-key-art.md
 │   ├── platform-publishing-pack.md
+│   ├── platform-risk-guardrails.md
 │   ├── production-checklist.md
 │   └── video-brief-schema.md
 └── scripts/
@@ -39,6 +40,7 @@ github-skill-video-maker/
     ├── create_video_brief.py
     ├── fetch_github_metadata.py
     ├── qa_check.py
+    ├── validate_platform_safety.py
     ├── validate_production_gate.py
     └── validate_visual_manifest.py
 ```
@@ -94,6 +96,12 @@ python3 scripts/create_video_brief.py \
 python3 scripts/create_publishing_pack.py \
   --brief work/superpowers/video-brief.json \
   --output outputs/superpowers-case-publishing-pack.md
+
+python3 scripts/validate_platform_safety.py \
+  --brief work/superpowers/video-brief.json \
+  --text outputs/superpowers-case-narration.txt \
+  --text outputs/superpowers-case-subtitles.srt \
+  --text outputs/superpowers-case-publishing-pack.md
 ```
 
 After rendering, run QA:
@@ -127,6 +135,9 @@ The generated publishing pack is designed to reduce common short-video publishin
 - Mark AI-assisted creation when relevant.
 - Avoid exaggerated claims, guaranteed outcomes, academic ghostwriting, platform evasion, copyright misuse, and illegal-access language.
 - Include source and capture-date notes for GitHub Star counts and other time-sensitive claims.
+- Keep source URLs in internal metadata. Public video, cover, captions, and pinned comments use project identity and dated evidence without outbound addresses or acquisition instructions.
+- Crop public screenshots to remove address bars, QR/contact details, clone/download controls, package-install commands, and unrelated outbound calls to action.
+- Keep CTAs inside the platform: save, follow, comment on the topic, forward, or watch the next episode.
 - Recheck official platform rules before publishing policy-sensitive content.
 
 This repository does not provide legal advice.

@@ -50,7 +50,7 @@ Do not use humor that creates false claims:
 Opening line pattern:
 
 - Start with a funny pain: `你让一个 AI 写前端、审代码、做增长，它都快被你安排成联合创始人了。`
-- Then define plainly: `Agency Agents 做的事，是把 AI 拆成可安装的专家角色。`
+- Then define plainly: `Agency Agents 做的事，是把 AI 拆成可调用的专家角色。`
 - Then show proof: `制作时 GitHub 大约 130k Stars，仓库里有 299 个 agent 文件。`
 
 ## Body Copy And Narration Style

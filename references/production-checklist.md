@@ -5,7 +5,7 @@
 - Repository overview: capture the GitHub page with repo name and Star count visible.
 - Star close-up: if the Star count is too small in the overview, create a cropped or zoomed shot showing the star button/count clearly.
 - Feature evidence: capture exact files or sections being discussed.
-- Install evidence: capture official install instructions or plugin config.
+- Compatibility evidence: capture supported hosts, workflow boundaries, or configuration structure. Keep installation/download commands only in internal research, not in the public-platform edit.
 - Skill evidence: for Skill videos, capture the skills directory and at least one representative `SKILL.md`.
 - Visual manifest: every final screenshot/crop/evidence card must list `scene_id`, `source_url_or_path`, `narration_claim`, `target_region`, and `why_this_screenshot`.
 - No filler screenshots: remove any capture that does not directly support the narration claim in its scene.
@@ -14,6 +14,7 @@
 - GitHub full-page screenshots establish source trust; feature explanations should use zoomed crops or redrawn evidence cards that are readable without pausing.
 - AI-generated key art must not be used as evidence. Keep generated visuals for atmosphere, IP action, cover appeal, transitions, and brand moments only.
 - Do not fake a human screencast. Avoid decorative mouse cursors, fake clicks, fake scrolling, and fake text selection. If real browser interaction is not recorded, use stable screenshots, readable crops, evidence cards, zooms, pans, and precise highlights.
+- Create separate distribution-safe crops for public video use. Remove browser/address bars, raw URLs, QR codes, contact handles, clone/download controls, package-install commands, sign-up controls, and unrelated outbound calls to action while preserving project identity, Star evidence, and claim-relevant text.
 
 ## Production Account Gate
 
@@ -37,7 +38,7 @@
 - Evidence cards: use readable cards for any GitHub/code text that would be too small on mobile.
 - Visual rhythm: avoid nine evenly paced slides. Include at least one punch-in, reveal, comparison, or before/after moment every 10-15 seconds.
 - Sound design plan: define emphasis, transition, click, pop, or whoosh moments even if the final renderer uses lightweight generated sounds.
-- CTA: end with a concrete action such as follow, collect, comment for template, or view the next Skill.
+- CTA: end with an in-platform action such as follow, save this video, comment on the topic, forward, or watch the next episode. Never promise templates/files/links through comments or private messages.
 - Creator signature: reserve the final 3-6 seconds for account identity and closing line. For this user's series, default to `我是凸先生，专注 AI 全栈流程，我们下次再见！`
 - Do not deliver as production-ready if hook, real case flow, proof moment, CTA, or creator signature is missing.
 
@@ -69,7 +70,16 @@
 - Avoid stacking unrelated decorations, particles, cards, tags, or labels over evidence. Remove elements that are not doing explanatory work.
 - Export key frames or a contact sheet and check overlap between subtitles, IP, labels, callouts, highlights, Star badges, screenshots, and cover text.
 - When image2 key art is used, reserve clean overlay zones before rendering: title, subtitle, Star/source badge, IP motion, evidence crop, and bottom subtitle safe area.
-- Add the small note `纯干货分享，不存在站外引流` in a low-emphasis non-subtitle zone, preferably upper-right or upper edge. It must not be near the bottom line subtitles and must not cover evidence, Star badges, IP characters, or key labels.
+- Do not add anti-evasion copy containing `站外` or `引流`. Use the platform's native AI label; if a small on-video label is needed, use only `AI 辅助创作` and keep it outside subtitle/evidence zones.
+
+## External-Channel Safety
+
+- Default to `strict_platform_safe` for Douyin, WeChat Channels, and Xiaohongshu.
+- Do not show or speak raw URLs, domains, QR codes, contact handles, project-address language, or directions to websites/apps/mini programs.
+- Do not tell viewers to download, install, clone, register, or obtain anything through comments, profiles, private messages, groups, or other channels.
+- Keep source URLs in internal metadata only. Public source notes may name the project/source type and capture date without an address or action instruction.
+- Scan the final brief, narration, subtitles, renderer source, and publishing pack with `validate_platform_safety.py`; treat any finding as blocking.
+- Manually inspect cover and preview frames for risky text embedded in screenshots or generated artwork.
 
 ## Subtitle Rules
 
@@ -117,7 +127,7 @@
 
 - Head: observes, warns, stamps conclusions, blinks/glows.
 - Route: draws or pulls process lines, connects steps.
-- Key: unlocks installation/access, rotates key ring, introduces setup.
+- Key: unlocks an artifact, compatibility concept, output, or decision point. It must not encourage third-party installation/download in public-platform edits.
 - Each IP appearance needs a story role in the storyboard. If an IP is only decoration, remove it or give it a job.
 
 ## Delivery Bundle
@@ -150,6 +160,8 @@ Do not copy cover images, preview sheets, narration text/audio, subtitle files, 
 - Add a Star/date note when GitHub popularity is mentioned, for example `Star 数为制作时截图数据`.
 - State boundaries plainly for sensitive domains such as education, finance, medical, legal, credentialing, and security tooling.
 - Add an AI-assisted disclosure when the video uses AI narration, AI image/video generation, AI clone voice, or synthetic characters.
+- Public titles, body copy, pinned comments, and hashtags must not contain raw URLs, project addresses, QR/contact details, download/install directions, or comments/profile/private-message delivery language.
+- Replace outbound CTAs with in-platform actions: save, follow, comment on the topic, forward, or watch the next episode.
 
 ## Script QA
 
@@ -162,6 +174,7 @@ Do not copy cover images, preview sheets, narration text/audio, subtitle files, 
 - Fill `subtitle_strategy` with both `insight_subtitles` and `line_subtitles`; sparse keyword captions are not enough.
 - Fill `subtitle_strategy.timing_source` with the final narration audio path and `subtitle_strategy.alignment_method` with the actual alignment method used.
 - Run `validate_production_gate.py` before rendering and again before delivery.
+- Run `validate_platform_safety.py` before rendering and again on the final narration, subtitles, renderer source, and publishing pack.
 - Maintain `visual-manifest.json` during editing for screenshot selection, highlight targets, and layout/occlusion checks. Validate it with `scripts/validate_visual_manifest.py`.
 - If image2 assets are used, include generated key-art records in `visual-manifest.json` and manually inspect them for wrong text, fake UI, logo/copyright risk, IP mismatch, and factual confusion.
 - Treat visual-manifest highlight failures as blocking. The final video is not production-ready if any red box/circle lacks target evidence, coordinate space, verification method, or exported-frame confirmation.

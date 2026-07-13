@@ -8,6 +8,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from platform_safety import scan_brief
+
 
 GENERIC_COVER_HOOKS = {"科研写作助手", "项目介绍", "skill介绍", "github项目", "开源项目"}
 
@@ -128,16 +130,33 @@ def validate_production_gate(brief: dict[str, Any]) -> dict[str, Any]:
     if interaction.get("fake_human_screencast") is not False:
         failures.append("interaction_style.fake_human_screencast must be false; do not simulate human screencasts with decorative cursors or fake interaction")
 
+    distribution = brief.get("platform_distribution_safety", {}) or {}
+    if distribution.get("mode") != "strict_platform_safe":
+        failures.append("platform_distribution_safety.mode must be strict_platform_safe for production-platform delivery")
+    for field in [
+        "external_routing_free",
+        "third_party_action_free",
+        "public_copy_url_free",
+        "distribution_crops_verified",
+    ]:
+        if distribution.get(field) is not True:
+            failures.append(f"platform_distribution_safety.{field} must be true after final review")
+    distribution_qa = distribution.get("qa", {}) or {}
+    for field in ["final_text_scan_passed", "cover_and_preview_manually_checked"]:
+        if distribution_qa.get(field) is not True:
+            failures.append(f"platform_distribution_safety.qa.{field} must be true")
+
     safety_note = brief.get("platform_safety_note", {}) or {}
-    if safety_note.get("text") != "纯干货分享，不存在站外引流":
-        failures.append("platform_safety_note.text must be 纯干货分享，不存在站外引流")
-    if _blank(safety_note.get("placement")):
-        failures.append("platform_safety_note.placement is required and should be an unobtrusive non-subtitle zone")
-    note_qa = safety_note.get("qa", {}) or {}
-    if note_qa.get("not_near_bottom_subtitles") is not True:
-        failures.append("platform_safety_note.qa.not_near_bottom_subtitles must be true")
-    if note_qa.get("does_not_cover_key_evidence") is not True:
-        failures.append("platform_safety_note.qa.does_not_cover_key_evidence must be true")
+    if safety_note.get("enabled"):
+        if safety_note.get("text") != "AI 辅助创作":
+            failures.append("platform_safety_note.text may only be AI 辅助创作 when enabled")
+        if _blank(safety_note.get("placement")):
+            failures.append("platform_safety_note.placement is required when the neutral AI label is enabled")
+
+    for finding in scan_brief(brief):
+        failures.append(
+            f"platform public text contains {finding['risk']}: {finding['match']} ({finding['snippet']})"
+        )
 
     case = brief.get("real_case_flow", {})
     for field in ["input", "skill_action", "output_artifacts", "value"]:

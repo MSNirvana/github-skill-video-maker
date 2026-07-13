@@ -25,6 +25,16 @@ Production output:
 
 ## Required Workflow
 
+### Content Type Routing
+
+Classify the source before writing the brief. Record `content_type` and `series` explicitly; do not reuse Skill language for every GitHub repository.
+
+- `skill`, `plugin`, or workflow package: use the existing `GitHub Skill Case` series. Explain the human problem, trigger/input, routing or execution flow, generated artifacts, value, and boundary.
+- `open_source_project`: use the separate `AI 开源项目拆解` series. Build the story as real pain or incident -> project identity and Stars -> real product case -> UI/workflow evidence -> architecture or technical mechanism -> maturity, security, and roadmap boundaries -> viewer decision.
+- For an open-source project, do not explain Skill triggering, Skill installation, or Skill file structure unless those are genuinely the subject of the repository.
+- Project videos should answer `what problem does this product solve`, `what does the real workflow look like`, `what evidence proves it`, and `is it mature enough for this viewer`. Skill videos should answer `when does the Skill trigger`, `what workflow does it enforce`, and `what artifact or behavior does it produce`.
+- Keep the same brand system, IP roles, subtitles, platform safety, Star proof, creator signature, and final delivery rules across both series. Change the series label, script structure, evidence hierarchy, and publishing-pack collection name.
+
 1. Research the source.
    - Use the GitHub repository, README, docs, release notes, plugin manifests, and important Skill files.
    - Verify unstable facts from the live web, especially GitHub Star count, current repo state, supported platforms, and install commands.

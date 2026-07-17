@@ -14,6 +14,7 @@ Required top-level fields:
 - `style`: e.g. `evidence-explainer`
 - `theme`: color/style hints
 - `ip_roles`: role mapping for head/route/key IP characters
+- `ip_narrative`: character-led episode mode, recurring series frame, dramatic conflict, character beats, scene cast, and IP-specific QA
 - `required_outputs`: expected output filenames
 - `storyboard`: scene list
 - `qa`: booleans for required quality gates
@@ -37,6 +38,28 @@ Required top-level fields:
 - `platform_distribution_safety`: strict in-platform distribution mode, public-copy restrictions, screenshot-crop status, and final-scan QA
 - `platform_safety_note`: optional neutral AI disclosure; omit by default or use only `AI 辅助创作`
 - `model_routing`: planned strong-model, low-cost-model, and deterministic-tool routing for cost control
+
+Recommended `ip_narrative` fields:
+
+- `mode`: `ip-led-story`, `hybrid-evidence`, or `evidence-explainer`
+- `series_frame`: one of `AI 工具实验室`, `一人公司开会`, `翻车救援`, `GitHub 项目面试`, or `观点对决`
+- `episode_type`: `traffic`, `depth`, or `brand`
+- `episode_premise`: one sentence describing what happens to the recurring characters in this episode
+- `roles`: working name, dramatic job, personality, allowed actions, and forbidden uses for each character
+- `conflict`: viewer doubt or workflow problem raised by Black Character
+- `obstacle`: real condition, failure, limitation, or boundary encountered during the test
+- `resolution_evidence`: real screenshot, artifact, result, or boundary used by Key Character for the verdict
+- `character_beats`: ordered beats with `scene_id`, `character`, `intent`, `line_or_reaction`, `action_state`, and `evidence_target`
+- `scene_cast`: scene-level `lead_character` and optional `supporting_character`; allow all three only for cover, deliberate merge, or signature scenes
+- `qa`: checks for distinct roles, evidence-resolved conflict, meaningful movement, subtitle/evidence safety, and the remove-the-IP test
+
+Character-role rule:
+
+- Black Character is the skeptical audience proxy.
+- Route Character is the builder/tester who makes the workflow visible.
+- Key Character is the product judge who verifies the result and states the boundary.
+- These are working role names, not permanent public brand names.
+- Read `ip-character-storytelling.md` before filling these fields.
 
 Recommended storyboard scene ids:
 

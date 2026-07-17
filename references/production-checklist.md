@@ -125,10 +125,13 @@
 
 ## IP Motion Roles
 
-- Head: observes, warns, stamps conclusions, blinks/glows.
-- Route: draws or pulls process lines, connects steps.
-- Key: unlocks an artifact, compatibility concept, output, or decision point. It must not encourage third-party installation/download in public-platform edits.
-- Each IP appearance needs a story role in the storyboard. If an IP is only decoration, remove it or give it a job.
+- Black Character: acts as the skeptical audience proxy, raises the conflict, and points to the doubt or evidence.
+- Route Character: turns the doubt into a visible test or 2-4 step workflow.
+- Key Character: verifies the result, states the boundary, and gives the qualified viewer decision. It must not encourage third-party installation/download in public-platform edits.
+- Give each scene one lead character and at most one support character. Allow all three only on the cover, one deliberate merge beat, or the signature.
+- Each IP appearance needs a story action in the storyboard. If it does not question, point, carry input, trace a route, react to proof, inspect an output, or give a verdict, remove it.
+- Do not use continuous bobbing as the only motion. Use pose changes, prop interaction, process drawing, reaction, inspection, and exit states.
+- Run the remove-the-IP test: if removing the characters leaves the same question, experiment, and verdict, the roles are still decoration.
 
 ## Delivery Bundle
 
@@ -139,14 +142,16 @@ Keep production and QA files in `work/` or `outputs/` as needed:
 - `<project>-case-narration.txt`
 - `<project>-case-narration.mp3`
 - `<project>-case-preview-sheet.jpg`
+- `<project>-case-script-handoff.md`
 - `<project>-publishing-pack.md`
 
-Archive only the two production-account deliverables to the user's desktop folder by default:
+Archive only the three production-account deliverables to the user's desktop folder by default:
 
 - `<project>-case-90s-vertical.mp4`
 - `<project>-publishing-pack.md`
+- `<project>-case-script-handoff.md`
 
-Do not copy cover images, preview sheets, narration text/audio, subtitle files, briefs, manifests, QA reports, screenshots, or source files into `/Users/gaoyunhong/Desktop/凸先生/视频素材/<YYYYMMDD> <SkillName>` unless the user explicitly asks for them.
+Do not copy cover images, preview sheets, narration audio, subtitle files, briefs, manifests, QA reports, screenshots, or source files into `/Users/gaoyunhong/Desktop/凸先生/视频素材/<YYYYMMDD> <SkillName>` unless the user explicitly asks for them.
 
 ## Platform Publishing Pack
 
@@ -169,6 +174,7 @@ Do not copy cover images, preview sheets, narration text/audio, subtitle files, 
 - Run `capture_github_screenshots.py` before designing visuals. Pass the metadata `default_branch` when capturing repo paths. Treat crop boxes as starting points; verify visually.
 - Run `create_video_brief.py` before rendering so metadata, screenshots, IP roles, required outputs, and scene intent are in one JSON file.
 - Fill `script_strategy` with `core_angle`, `viewer_doubt`, `plain_answer`, `account_point_of_view`, `hkr_score`, `micro_story`, `anti_ai_fluff_scan`, `human_voice_rules`, `escalation_beats`, and QA booleans.
+- For `ip-led-story` or `hybrid-evidence`, fill `ip_narrative` with the episode premise, conflict, obstacle, resolution evidence, all three character roles, semantic character beats, scene cast, and QA booleans.
 - Fill production fields in `video-brief.json`: `hook`, `why_watch`, `real_case_flow`, `proof_moment`, `cover_hook`, `cta`, `creator_signature`, `retention_beats`, `evidence_cards`, and `sound_design`.
 - Fill `beginner_clarity` with `plain_definition`, `target_user`, `pain_solved`, `first_10_seconds`, `jargon_translations`, and `so_what_beats`.
 - Fill `subtitle_strategy` with both `insight_subtitles` and `line_subtitles`; sparse keyword captions are not enough.

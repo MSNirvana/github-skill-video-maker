@@ -44,6 +44,8 @@ def expected_from_required_outputs(out_dir: Path, required_outputs: list[str]) -
             expected["narration_audio"] = path
         elif name.endswith("-preview-sheet.jpg") or "preview" in name and name.endswith((".jpg", ".jpeg", ".png")):
             expected["preview"] = path
+        elif name.endswith("-script-handoff.md"):
+            expected["script_handoff"] = path
     return expected
 
 
@@ -63,6 +65,7 @@ def main() -> int:
     parser.add_argument("--narration-audio", default="", help="Explicit narration audio path")
     parser.add_argument("--preview", default="", help="Explicit preview sheet path")
     parser.add_argument("--publishing-pack", default="", help="Explicit platform publishing pack Markdown path")
+    parser.add_argument("--script-handoff", default="", help="Explicit editable script handoff Markdown path")
     parser.add_argument("--visual-manifest", default="", help="Optional visual manifest JSON path")
     parser.add_argument("--platform-text", action="append", default=[], help="Narration, SRT, renderer source, or other public text to scan; repeat as needed")
     parser.add_argument("--production-gate", action="store_true", help="Validate production account gate fields")
@@ -88,6 +91,10 @@ def main() -> int:
     if publishing_pack.get("output"):
         expected["publishing_pack"] = out_dir / publishing_pack["output"]
     override_path(expected, "publishing_pack", args.publishing_pack)
+    script_handoff = brief.get("script_handoff", {})
+    if script_handoff.get("output"):
+        expected["script_handoff"] = out_dir / script_handoff["output"]
+    override_path(expected, "script_handoff", args.script_handoff)
 
     failures: list[str] = []
     for label, path in expected.items():
@@ -112,7 +119,7 @@ def main() -> int:
             failures.append(f"ffprobe failed: {exc}")
 
     repo = brief.get("repo", {})
-    if brief.get("qa", {}).get("must_show_star_count") and not repo.get("stars"):
+    if brief.get("qa", {}).get("must_show_star_count") and ("stars" not in repo or repo.get("stars") is None):
         failures.append("Brief does not contain a GitHub Star count")
 
     pack_path = expected.get("publishing_pack")
@@ -125,6 +132,13 @@ def main() -> int:
         if "High-Risk Wording Checklist" not in pack_text and "高风险" not in pack_text:
             failures.append("Publishing pack missing high-risk wording checklist")
         platform_safety_findings.extend(scan_text(pack_text, str(pack_path)))
+    script_path = expected.get("script_handoff")
+    if script_path and script_path.exists():
+        script_text = script_path.read_text(encoding="utf-8", errors="ignore")
+        if "可直接改写的正文" not in script_text:
+            failures.append("Script handoff missing editable main section")
+        if not script_text.strip():
+            failures.append("Script handoff is empty")
     for raw_path in args.platform_text:
         platform_path = Path(raw_path)
         if not platform_path.exists():

@@ -15,13 +15,14 @@ Production output:
 - A separate cover image using the same visual system when needed for QA, first-frame design, or an explicitly requested cover export
 - Optional `image2` key-art assets for production-grade covers, first frames, chapter openers, and branded end cards
 - Narration script and generated narration audio
+- Editable script handoff file: a clean, timestamp-free narration draft for rewriting before TTS and subtitle alignment
 - Dual-layer Chinese subtitles: a short on-screen insight label plus complete line-by-line narration subtitles
 - Strict in-platform distribution by default: no public URLs, QR codes, account/contact handles, third-party download or installation directions, or language that sends viewers to comments, profiles, private messages, websites, apps, or mini programs
 - Preview sheet of key frames
 - A platform publishing pack for Douyin, WeChat Channels, and Xiaohongshu
 - Internal production files may include cover images, preview sheets, narration text/audio, subtitle files, briefs, visual manifests, QA reports, screenshots, and Remotion source. Keep these in `work/` or `outputs/` for rebuild and QA, but do not treat them as final desktop deliverables unless the user explicitly asks.
-- Final desktop delivery defaults to only two files: the final `.mp4` video and the platform publishing pack `.md`.
-- When archiving final deliverables for this user's production account, copy only those two files to `/Users/gaoyunhong/Desktop/凸先生/视频素材/<YYYYMMDD> <SkillName>`; use the Skill/project name after the date, for example `20260710 Claude-video`, and do not add daily sequence numbers.
+- Final desktop delivery defaults to three files: the final `.mp4` video, the platform publishing pack `.md`, and the editable script handoff `.md`. Keep the handoff file in the same dated project folder so the script can be revised without extracting text from the video.
+- When archiving final deliverables for this user's production account, copy only those three files to `/Users/gaoyunhong/Desktop/凸先生/视频素材/<YYYYMMDD> <SkillName>`; use the Skill/project name after the date, for example `20260710 Claude-video`, and do not add daily sequence numbers.
 
 ## Required Workflow
 
@@ -34,6 +35,17 @@ Classify the source before writing the brief. Record `content_type` and `series`
 - For an open-source project, do not explain Skill triggering, Skill installation, or Skill file structure unless those are genuinely the subject of the repository.
 - Project videos should answer `what problem does this product solve`, `what does the real workflow look like`, `what evidence proves it`, and `is it mature enough for this viewer`. Skill videos should answer `when does the Skill trigger`, `what workflow does it enforce`, and `what artifact or behavior does it produce`.
 - Keep the same brand system, IP roles, subtitles, platform safety, Star proof, creator signature, and final delivery rules across both series. Change the series label, script structure, evidence hierarchy, and publishing-pack collection name.
+
+### IP Narrative Routing
+
+Treat the three IP characters as recurring protagonists and the repository as the event, candidate, tool, or problem of the episode. Read `references/ip-character-storytelling.md` before writing an IP-led script or assigning character motion.
+
+- Use `ip-led-story` for production-account topics that support an experiment, workplace conflict, interview, failed workflow, or viewer debate.
+- Use `hybrid-evidence` when the topic needs more technical depth or risk context; characters frame questions and verdicts while real evidence remains visually dominant.
+- Use `evidence-explainer` when character framing would trivialize the topic or reduce clarity. Do not force jokes into serious safety, loss, policy, legal, medical, or financial scenes.
+- Record `ip_narrative.mode`, `series_frame`, `episode_type`, `episode_premise`, `conflict`, `obstacle`, `resolution_evidence`, `character_beats`, and `scene_cast` in the brief.
+- Use working role names unless the creator has approved permanent public names: Black Character is the skeptical audience proxy, Route Character is the builder/tester, and Key Character is the product judge.
+- Resolve character conflict with repository evidence, a real result, or a real boundary. A character opinion is never proof.
 
 1. Research the source.
    - Use the GitHub repository, README, docs, release notes, plugin manifests, and important Skill files.
@@ -52,6 +64,7 @@ Classify the source before writing the brief. Record `content_type` and `series`
 3. Write a low-text case script.
    - Use this structure unless the user gives a better one: pain point -> project identity -> real workflow -> key capabilities -> compatibility/boundary -> value.
    - Read `references/script-writing-methodology.md` before writing narration, cover hooks, insight subtitles, or publishing copy.
+   - Read `references/ip-character-storytelling.md` when `ip_narrative.mode` is `ip-led-story` or `hybrid-evidence`.
    - Read `references/platform-risk-guardrails.md` before writing any narration, subtitle, CTA, cover, screenshot title, or publishing copy intended for Douyin, WeChat Channels, or Xiaohongshu.
    - Define a `script_strategy` in the brief before drafting: `core_angle`, `viewer_doubt`, `plain_answer`, `hkr_score`, `micro_story`, `human_voice_rules`, `anti_ai_fluff_scan`, and `escalation_beats`.
    - Treat the repo as evidence for a human problem. Do not write a README summary or a feature list unless the viewer pain and workflow value are already clear.
@@ -61,6 +74,7 @@ Classify the source before writing the brief. Record `content_type` and `series`
    - Prefer before/after framing over feature lists: `before: agent writes directly` -> `after: agent follows spec, plan, test, review`.
    - Every 15 seconds, include a plain `so what` moment that tells the viewer why the capability matters.
    - Run an anti-AI-fluff pass before recording TTS. Remove generic openings, report-style transitions, unsupported hype, abstract efficiency claims, and empty tool labels.
+   - Save the final narration as an editable script handoff file with no timestamps in the main rewrite section. Keep the full spoken content, project facts, recommended title, and boundary notes together so the user can revise the copy before regenerating TTS.
    - Avoid on-screen paragraphs. On-screen text should be short labels or emphasis words.
    - Use narration for explanation, visuals for evidence.
    - For Skill videos, include at least one real or representative usage flow: user prompt/input -> Skill routing/action -> generated or expected artifacts -> value. Do not rely only on repo browsing.
@@ -104,12 +118,12 @@ Classify the source before writing the brief. Record `content_type` and `series`
    - Reserve separate zones for insight subtitle, line subtitle, evidence, and IP characters; do not let either subtitle layer cover core screenshots or Star badges.
 
 6. Integrate the IP.
-   - Use all three bundled IP roles when the video is long enough:
-     - `head`: insight, pain point, warning, conclusion
-     - `route`: workflow, connection, process, platform support
-     - `key`: artifact, access concept, compatibility, output, or decision point; do not use it to encourage third-party installation/download in a public-platform video
-   - Animate IP characters with motion-design techniques: entrance, bobbing, tilt, glow pulse, route drawing, unlock ring, or pointing/callout behavior.
-   - IP must participate in the explanation, not sit as decoration.
+   - Give each role a distinct dramatic job: Black Character raises the viewer doubt, Route Character performs the test or workflow, and Key Character checks the result and states the boundary.
+   - Assign one `lead_character` per scene and at most one support character. Show all three together only on the cover, one deliberate merge beat, or the closing signature.
+   - Use 3-5 meaningful character beats in a 45-60 second episode and 5-7 in a 60-90 second episode. Each beat must question, point, carry an input, trace a route, react to proof, inspect an output, or give a verdict.
+   - Animate with pose changes and story actions such as entrance, pointing, carrying, route drawing, artifact reveal, inspection, reaction, and exit. Do not use continuous bobbing as the only motion.
+   - Reduce or freeze character motion while viewers read screenshots, code, Star proof, or subtitles.
+   - IP must participate in the episode's conflict, experiment, or verdict, not sit as decoration or repeat the narrator.
    - IP must never occupy the bottom subtitle stack. If an IP character makes the line subtitles, insight subtitles, or bottom composition feel crowded, move it above the subtitle band or remove it. A clean subtitle area is more important than showing an extra character.
 
 7. Create a unified cover.
@@ -203,7 +217,18 @@ python3 <skill>/scripts/qa_check.py \
 
 If final filenames differ from the brief, pass explicit paths such as `--video outputs/superpowers-case-v2-90s-vertical.mp4 --cover outputs/superpowers-case-v2-cover.png`.
 
-6. Generate the platform publishing pack:
+6. Generate the editable script handoff:
+
+```bash
+python3 <skill>/scripts/create_script_handoff.py \
+  --brief work/<slug>/video-brief.json \
+  --narration-text outputs/<project>-narration.txt \
+  --output outputs/<project>-script-handoff.md
+```
+
+The handoff is the rewrite source of truth: it keeps the full narration in clean paragraphs, without subtitle timestamps or audio segmentation noise. If the user rewrites it, regenerate narration audio and re-align subtitles from the new final audio.
+
+7. Generate the platform publishing pack:
 
 ```bash
 python3 <skill>/scripts/create_publishing_pack.py \
@@ -287,16 +312,21 @@ Before final response, confirm these are true:
 - The public video, cover, narration, subtitles, and publishing copy contain no raw URL, QR code, contact handle, download/install instruction, project-address CTA, or direction to comments/profiles/private messages for obtaining anything.
 - GitHub evidence uses distribution-safe crops: project identity and Star proof remain visible while address bars, raw URLs, clone/download controls, package-install commands, QR codes, and unrelated calls to action are removed.
 - The three IP forms appear and move in meaningful roles.
+- In `ip-led-story` or `hybrid-evidence`, the three roles have distinct jobs, the conflict is resolved by evidence, each character beat has a semantic action, and the remove-the-IP test passes: removing the roles would remove the episode's question, experiment, or verdict rather than only its decoration.
+- Each scene has at most one lead and one supporting IP character unless it is the cover, a deliberate merge beat, or the closing signature.
 - The first 3 seconds contain a concrete hook, not a generic topic label.
 - The cover title, opening line, narration body, subtitle highlights, and platform copy include a punchy or funny hook while staying evidence-backed and platform-safe.
 - The video includes a real or representative usage flow and at least one readable evidence card.
 - The final seconds include the creator signature/account positioning and a clear closing line.
 - The platform publishing pack includes Douyin, WeChat Channels, and Xiaohongshu copy plus compliance notes.
-- The output video and publishing pack are present. Internal QA/build files such as cover, narration text/audio, preview sheet, subtitles, brief, manifest, and reports may stay in `work/` or `outputs/`, but the final desktop delivery folder contains only the `.mp4` and publishing pack `.md` unless the user explicitly requests more.
+- The output video, publishing pack, and editable script handoff are present. Internal QA/build files such as cover, narration audio, preview sheet, subtitles, brief, manifest, and reports may stay in `work/` or `outputs/`; the final desktop delivery folder contains the `.mp4`, publishing pack `.md`, and script handoff `.md`.
+- The editable script handoff is present and contains the complete narration in a clean rewrite-ready section without timestamps.
 
 For detailed production notes, read `references/production-checklist.md`.
 
 For script angle, HKR scoring, micro-story structure, and anti-AI-fluff checks, read `references/script-writing-methodology.md`.
+
+For recurring character roles, episode formats, action states, and IP-led production gates, read `references/ip-character-storytelling.md`.
 
 For the structured JSON format, read `references/video-brief-schema.md`.
 

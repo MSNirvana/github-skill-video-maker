@@ -12,6 +12,10 @@ from platform_safety import scan_brief
 
 
 GENERIC_COVER_HOOKS = {"科研写作助手", "项目介绍", "skill介绍", "github项目", "开源项目"}
+IP_NARRATIVE_MODES = {"ip-led-story", "hybrid-evidence", "evidence-explainer"}
+IP_LED_MODES = {"ip-led-story", "hybrid-evidence"}
+IP_CHARACTERS = {"black", "route", "key"}
+ALL_THREE_SCENE_IDS = {"cover", "merge", "signature"}
 
 
 def _blank(value: Any) -> bool:
@@ -28,6 +32,73 @@ def validate_production_gate(brief: dict[str, Any]) -> dict[str, Any]:
             failures.append(f"hook.{field} is required")
     if _blank(brief.get("why_watch")):
         failures.append("why_watch is required")
+
+    ip_narrative = brief.get("ip_narrative", {}) or {}
+    narrative_mode = ip_narrative.get("mode")
+    if narrative_mode not in IP_NARRATIVE_MODES:
+        failures.append("ip_narrative.mode must be ip-led-story, hybrid-evidence, or evidence-explainer")
+    if narrative_mode in IP_LED_MODES:
+        for field in ["series_frame", "episode_type", "episode_premise", "conflict", "obstacle", "resolution_evidence"]:
+            if _blank(ip_narrative.get(field)):
+                failures.append(f"ip_narrative.{field} is required for {narrative_mode}")
+
+        roles = ip_narrative.get("roles", {}) or {}
+        for character in sorted(IP_CHARACTERS):
+            role = roles.get(character, {}) or {}
+            for field in ["working_name", "dramatic_job", "personality", "allowed_actions", "forbidden_uses"]:
+                if _blank(role.get(field)):
+                    failures.append(f"ip_narrative.roles.{character}.{field} is required")
+
+        character_beats = ip_narrative.get("character_beats", []) or []
+        minimum_beats = 3 if float(brief.get("duration_seconds", 90) or 90) <= 60 else 5
+        if len(character_beats) < minimum_beats:
+            failures.append(f"ip_narrative.character_beats should include at least {minimum_beats} meaningful beats")
+        represented_characters: set[str] = set()
+        for index, beat in enumerate(character_beats):
+            for field in ["scene_id", "character", "intent", "line_or_reaction", "action_state", "evidence_target"]:
+                if _blank(beat.get(field)):
+                    failures.append(f"ip_narrative.character_beats[{index}].{field} is required")
+            character = beat.get("character")
+            if character not in IP_CHARACTERS:
+                failures.append(f"ip_narrative.character_beats[{index}].character must be black, route, or key")
+            else:
+                represented_characters.add(character)
+        if represented_characters != IP_CHARACTERS:
+            failures.append("ip_narrative.character_beats must give black, route, and key distinct story actions")
+
+        scene_cast = ip_narrative.get("scene_cast", []) or []
+        if not scene_cast:
+            failures.append("ip_narrative.scene_cast is required for IP-led production")
+        for index, cast in enumerate(scene_cast):
+            scene_id = cast.get("scene_id")
+            lead = cast.get("lead_character")
+            supports = cast.get("supporting_characters", []) or []
+            if _blank(scene_id):
+                failures.append(f"ip_narrative.scene_cast[{index}].scene_id is required")
+            if lead not in IP_CHARACTERS:
+                failures.append(f"ip_narrative.scene_cast[{index}].lead_character must be black, route, or key")
+            if any(character not in IP_CHARACTERS for character in supports):
+                failures.append(f"ip_narrative.scene_cast[{index}].supporting_characters contains an unknown character")
+            if lead in supports or len(set(supports)) != len(supports):
+                failures.append(f"ip_narrative.scene_cast[{index}] contains duplicate character assignments")
+            if len(supports) > 1:
+                exception_allowed = cast.get("all_three_exception") is True and scene_id in ALL_THREE_SCENE_IDS
+                if not exception_allowed:
+                    failures.append(
+                        f"ip_narrative.scene_cast[{index}] may use more than one support only for cover, merge, or signature"
+                    )
+
+        ip_qa = ip_narrative.get("qa", {}) or {}
+        for field in [
+            "distinct_dramatic_jobs",
+            "conflict_resolved_by_evidence",
+            "meaningful_action_per_beat",
+            "remove_ip_test_passed",
+            "one_lead_max_one_support_per_scene",
+            "characters_clear_of_subtitles_and_evidence",
+        ]:
+            if ip_qa.get(field) is not True:
+                failures.append(f"ip_narrative.qa.{field} must be true after final script and visual review")
 
     script = brief.get("script_strategy", {})
     for field in ["core_angle", "viewer_doubt", "plain_answer", "account_point_of_view"]:

@@ -24,6 +24,23 @@ def main() -> int:
     parser.add_argument("--duration", type=int, default=90)
     parser.add_argument("--language", default="zh-CN")
     parser.add_argument("--style", default="evidence-explainer")
+    parser.add_argument(
+        "--ip-narrative-mode",
+        choices=["ip-led-story", "hybrid-evidence", "evidence-explainer"],
+        default="ip-led-story",
+        help="How strongly the recurring IP characters drive the episode story",
+    )
+    parser.add_argument(
+        "--series-frame",
+        default="AI 工具实验室",
+        help="Recurring story frame, such as AI 工具实验室 or GitHub 项目面试",
+    )
+    parser.add_argument(
+        "--episode-type",
+        choices=["auto", "traffic", "depth", "brand"],
+        default="auto",
+        help="Episode length/editorial type; auto uses traffic up to 55s and depth otherwise",
+    )
     parser.add_argument("--output-prefix", default="", help="Output filename prefix, defaults to <slug>-case")
     args = parser.parse_args()
 
@@ -31,17 +48,21 @@ def main() -> int:
     screenshots = json.loads(Path(args.screenshots).read_text(encoding="utf-8"))
     slug = slugify(metadata["full_name"])
     output_prefix = args.output_prefix or f"{slug}-case"
+    episode_type = args.episode_type
+    if episode_type == "auto":
+        episode_type = "traffic" if args.duration <= 55 else "depth"
 
     scenes = [
-        {"id": "cover", "goal": "Open with project name, promise, Star signal, and all IP characters.", "visual": "cover"},
-        {"id": "pain", "goal": "State the user pain with minimal text.", "visual": "repo screenshot as background evidence"},
-        {"id": "repo-proof", "goal": "Show real GitHub repo and Star count.", "visual": "repo + star_actions crop", "required": ["stars"]},
-        {"id": "workflow", "goal": "Explain the core flow.", "visual": "route IP draws process line"},
-        {"id": "skills", "goal": "Show skills directory or important Skill files.", "visual": "skills screenshot"},
-        {"id": "deep-dive", "goal": "Show one representative file or capability.", "visual": "selected file screenshot"},
-        {"id": "compatibility", "goal": "Show supported hosts, workflow boundary, or configuration structure without public installation/download directions.", "visual": "distribution-safe README/plugin evidence card"},
-        {"id": "boundary", "goal": "State limitations and expectations.", "visual": "head IP + short tags"},
-        {"id": "value", "goal": "Close with one value sentence.", "visual": "unified IP lockup"},
+        {"id": "cover", "goal": "Open with a function-first promise, episode conflict, Star signal, and the recurring cast.", "visual": "cover"},
+        {"id": "pain", "goal": "Black Character voices the viewer doubt with minimal text.", "visual": "character conflict + project-relevant evidence"},
+        {"id": "repo-proof", "goal": "Show real GitHub repo identity and Star count.", "visual": "repo + star_actions crop", "required": ["stars"]},
+        {"id": "workflow", "goal": "Route Character turns the doubt into a 2-4 step test or workflow.", "visual": "route IP draws verified process line"},
+        {"id": "skills", "goal": "Show the exact directory, feature, input, or configuration used by the test.", "visual": "claim-relevant screenshot"},
+        {"id": "deep-dive", "goal": "Show one representative file, product state, or output artifact.", "visual": "selected evidence screenshot"},
+        {"id": "compatibility", "goal": "Show supported hosts, workflow condition, or configuration boundary without public installation/download directions.", "visual": "distribution-safe evidence card"},
+        {"id": "boundary", "goal": "Key Character checks the result and states limitations or expectations.", "visual": "key IP + verified boundary card"},
+        {"id": "value", "goal": "Give a qualified viewer decision: who benefits and why.", "visual": "key verdict + one value sentence"},
+        {"id": "signature", "goal": "Close with the creator signature and recurring cast.", "visual": "unified IP lockup"},
     ]
 
     brief = {
@@ -63,6 +84,62 @@ def main() -> int:
             "head": "pain, warning, conclusion",
             "route": "workflow, connection, platform support",
             "key": "artifact, compatibility, output, decision point",
+        },
+        "ip_narrative": {
+            "mode": args.ip_narrative_mode,
+            "series_frame": args.series_frame,
+            "episode_type": episode_type,
+            "episode_premise": "",
+            "roles": {
+                "black": {
+                    "asset_role": "head",
+                    "working_name": "Black Character",
+                    "dramatic_job": "skeptical audience proxy who creates the conflict",
+                    "personality": "quick, cheeky, evidence-seeking",
+                    "allowed_actions": ["question", "point", "crossed-arms doubt", "surprise", "receive input"],
+                    "forbidden_uses": ["unverified claim", "permanent corner avatar", "subtitle-area decoration"],
+                },
+                "route": {
+                    "asset_role": "route",
+                    "working_name": "Route Character",
+                    "dramatic_job": "builder who turns the doubt into a visible test or workflow",
+                    "personality": "practical, action-first, beginner-friendly",
+                    "allowed_actions": ["carry input", "run test", "draw route", "connect steps", "show progress"],
+                    "forbidden_uses": ["claim success without result evidence", "continuous idle bobbing", "subtitle-area decoration"],
+                },
+                "key": {
+                    "asset_role": "key",
+                    "working_name": "Key Character",
+                    "dramatic_job": "product judge who verifies the result and states the boundary",
+                    "personality": "calm, concise, mildly strict",
+                    "allowed_actions": ["inspect output", "reveal artifact", "state boundary", "give verdict"],
+                    "forbidden_uses": ["guaranteed-success implication", "download or install direction", "subtitle-area decoration"],
+                },
+            },
+            "conflict": "",
+            "obstacle": "",
+            "resolution_evidence": "",
+            "character_beats": [],
+            "scene_cast": [
+                {"scene_id": "cover", "lead_character": "black", "supporting_characters": ["route", "key"], "all_three_exception": True},
+                {"scene_id": "pain", "lead_character": "black", "supporting_characters": []},
+                {"scene_id": "repo-proof", "lead_character": "black", "supporting_characters": []},
+                {"scene_id": "workflow", "lead_character": "route", "supporting_characters": []},
+                {"scene_id": "skills", "lead_character": "route", "supporting_characters": []},
+                {"scene_id": "deep-dive", "lead_character": "route", "supporting_characters": ["black"]},
+                {"scene_id": "compatibility", "lead_character": "key", "supporting_characters": []},
+                {"scene_id": "boundary", "lead_character": "key", "supporting_characters": ["black"]},
+                {"scene_id": "value", "lead_character": "key", "supporting_characters": []},
+                {"scene_id": "signature", "lead_character": "key", "supporting_characters": ["black", "route"], "all_three_exception": True},
+            ],
+            "qa": {
+                "distinct_dramatic_jobs": False,
+                "conflict_resolved_by_evidence": False,
+                "meaningful_action_per_beat": False,
+                "remove_ip_test_passed": False,
+                "one_lead_max_one_support_per_scene": False,
+                "characters_clear_of_subtitles_and_evidence": False,
+            },
         },
         "hook": {
             "first_3_seconds": "",
@@ -264,7 +341,14 @@ def main() -> int:
             f"{output_prefix}-narration.txt",
             f"{output_prefix}-narration.mp3",
             f"{output_prefix}-preview-sheet.jpg",
+            f"{output_prefix}-script-handoff.md",
         ],
+        "script_handoff": {
+            "output": f"{output_prefix}-script-handoff.md",
+            "editable_main_section": True,
+            "timestamps_in_main_section": False,
+            "source": f"{output_prefix}-narration.txt",
+        },
         "publishing_pack": {
             "output": f"{output_prefix}-publishing-pack.md",
             "platforms": ["douyin", "wechat_channels", "xiaohongshu"],

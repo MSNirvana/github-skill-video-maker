@@ -12,12 +12,15 @@ This repository is a Codex Skill. It packages a repeatable production workflow f
 - Cover image using the same visual system
 - Optional image2 key art for covers, first frames, chapter posters, and branded end cards
 - Narration script and narration audio
+- Editable script handoff Markdown with a clean, timestamp-free rewrite section
 - Meme-style, contrast-style, and practical title candidates, with narration/body copy that keeps the same funny-but-useful voice
+- Optional IP-led storytelling where the recurring cast owns doubt, testing, and verification while each GitHub project becomes the episode event
 - Strict in-platform distribution: public video/copy omits URLs, QR/contact details, third-party action directions, and comment/profile/private-message delivery language
 - Preview sheet/contact sheet
 - Visual manifest for screenshot and highlight verification
 - Image2 key-art manifest records prompts, intended use, text verification, and evidence boundaries
 - Platform publishing pack with titles, captions, topics, pinned comments, AI disclosure, and compliance notes
+- Final delivery folder with the video, publishing pack, and editable script handoff
 
 ## Skill Layout
 
@@ -30,6 +33,7 @@ github-skill-video-maker/
 │   └── ip/
 ├── references/
 │   ├── image2-key-art.md
+│   ├── ip-character-storytelling.md
 │   ├── platform-publishing-pack.md
 │   ├── platform-risk-guardrails.md
 │   ├── production-checklist.md
@@ -37,6 +41,7 @@ github-skill-video-maker/
 └── scripts/
     ├── capture_github_screenshots.py
     ├── create_publishing_pack.py
+    ├── create_script_handoff.py
     ├── create_video_brief.py
     ├── fetch_github_metadata.py
     ├── qa_check.py
@@ -91,11 +96,18 @@ python3 scripts/create_video_brief.py \
   --output-prefix superpowers-case \
   --audience "AI users" \
   --duration 90 \
-  --language zh-CN
+  --language zh-CN \
+  --ip-narrative-mode ip-led-story \
+  --series-frame "AI 工具实验室"
 
 python3 scripts/create_publishing_pack.py \
   --brief work/superpowers/video-brief.json \
   --output outputs/superpowers-case-publishing-pack.md
+
+python3 scripts/create_script_handoff.py \
+  --brief work/superpowers/video-brief.json \
+  --narration-text outputs/superpowers-case-narration.txt \
+  --output outputs/superpowers-case-script-handoff.md
 
 python3 scripts/validate_platform_safety.py \
   --brief work/superpowers/video-brief.json \
@@ -138,6 +150,7 @@ The generated publishing pack is designed to reduce common short-video publishin
 - Keep source URLs in internal metadata. Public video, cover, captions, and pinned comments use project identity and dated evidence without outbound addresses or acquisition instructions.
 - Crop public screenshots to remove address bars, QR/contact details, clone/download controls, package-install commands, and unrelated outbound calls to action.
 - Keep CTAs inside the platform: save, follow, comment on the topic, forward, or watch the next episode.
+- Keep the editable script handoff separate from timed subtitles: it is the rewrite source, while the final audio remains the timing source for regenerated subtitles.
 - Recheck official platform rules before publishing policy-sensitive content.
 
 This repository does not provide legal advice.
